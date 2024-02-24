@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style type="text/css">
+html, #page {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	color: #959595;
+	font: normal 12px/2.0em Sans-Serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: darkred;
+}
+
+#page {
+	background: #fff;
+}
+
+#header, #footer, #top-nav, #content, #content #contentbar, #content #sidebar
+	{
+	margin: 0;
+	padding: 0;
+}
+
+/* Logo */
+#logo {
+	padding: 0;
+	width: 100;
+	float: left;
+	height:100;
+}
+
+/* Header */
+#header {
+	background: #fff;
+}
+
+#header-inner {
+	margin: 0 auto;
+	padding: 0;
+	width: 1450px;
+}
+
+/* Feature */
+.feature {
+	background: #3c568f;
+	padding: 18px;
+}
+
+.feature-inner {
+	margin: auto;
+	width: 970px;
+}
+
+.feature-inner h1 {
+	color: black;
+	font-size: 32px;
+}
+
+/* Clear both sides to assist with div alignment  */
+.clr {
+	clear: both;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	font-size: 0px;
+	line-height: 0px;
+}
+</style>
+</head>
+<body>
+	<div id="page">
+		<header id="header">
+			<div id="header-inner">
+				<div id="logo">
+					<h1>
+						<img src="" th:src="@{images/Logo.jpg}"/>
+					</h1>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</header>
+		<div class="feature">
+			<div class="feature-inner">
+				<h1>ABC Laboratory</h1>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
