@@ -35,4 +35,9 @@ public class CredentialsController {
 	public String example5() {
 		return "Footer";
 	}
+	
+	@RequestMapping("/patientDashboard")
+	public String example6() {
+		return "patientDashboard";
+	}
 }
