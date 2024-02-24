@@ -25,4 +25,14 @@ public class CredentialsController {
 	public String example3() {
 		return "newPassword";
 	}
+	
+	@RequestMapping("/header")
+	public String example4() {
+		return "Header";
+	}
+	
+	@RequestMapping("/footer")
+	public String example5() {
+		return "Footer";
+	}
 }
