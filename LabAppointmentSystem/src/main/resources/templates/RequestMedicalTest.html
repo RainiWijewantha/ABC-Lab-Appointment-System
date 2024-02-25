@@ -3,8 +3,52 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Request Medical Test</title>
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Header-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Footer-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/RequestMedicalTest-style.css}" />
+
 </head>
 <body>
+	<div th:include="Header :: body"></div>
+
+	<div class="form-page">
+		<div class="form-box">
+			<div class="form-title">
+				<h3>Request Medical Test</h3>
+			</div>
+			<div class="form-body">
+				<form action="" method="POST">
+					<div class="form-group">
+						<label for="name">Patient Full Name</label> <input type="name"
+							id="name" name="name" class="input-text" placeholder="Full Name">
+					</div>
+					<!-- <div class="form-group">
+						<label for="email">Test Type</label> <input type="email" id="email"
+							name="email" class="input-text" placeholder="Email Address">
+					</div>-->
+					<div class="form-group">
+						<label for="name">Doctor (Recommended)</label> <input type="name"
+							id="doctor" name="doctor" class="input-text"
+							placeholder="Doctor (Recommended)">
+					</div>
+					<div class="form-group">
+						<label for="number">Credit Card Number</label> <input type="name"
+							id="card" name="card" class="input-text"
+							placeholder="Credit Card Number">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="input-btn">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:include="Footer :: body"></div>
 
 </body>
 </html>
