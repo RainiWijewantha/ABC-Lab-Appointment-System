@@ -2,9 +2,35 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" type="image/png" href=""
+	th:href="@{/images/Logo-circle.jpg}" />
 <title>View Appointment Details</title>
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Header-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Footer-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/ViewAppointmentDetails-style.css}" />
+
 </head>
-<body>
+<body class="body1">
+	<div th:include="Header :: body"></div>
+
+	<div class="container">
+		<h2>View Appointment Details</h2>
+		<ul class="responsive-table">
+			<li class="table-header">
+				<div class="col col-1">Test Type</div>
+				<div class="col col-2">Doctor Name</div>
+				<div class="col col-3">Date</div>
+				<div class="col col-4">Action</div>
+			</li>
+			
+		</ul>
+	</div>
+
+	<div th:include="Footer :: body"></div>
 
 </body>
 </html>
