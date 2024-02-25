@@ -12,7 +12,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: darkred;
+	color: black;
 }
 
 #page {
@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Feature */
 .feature {
 	background: #3c568f;
-	padding: 5px;
+	padding: 8px;
 }
 
 .feature-inner {

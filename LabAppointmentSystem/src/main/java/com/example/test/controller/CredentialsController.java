@@ -40,4 +40,19 @@ public class CredentialsController {
 	public String example6() {
 		return "patientDashboard";
 	}
+	
+	@RequestMapping("/requestMedicalTest")
+	public String example7() {
+		return "RequestMedicalTest";
+	}
+	
+	@RequestMapping("/viewAppointmentDetails")
+	public String example8() {
+		return "ViewAppointmentDetails";
+	}
+	
+	@RequestMapping("/reports")
+	public String Reports() {
+		return "Reports";
+	}
 }
