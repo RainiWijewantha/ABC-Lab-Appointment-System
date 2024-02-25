@@ -2,9 +2,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="icon" type="image/png" href="" th:href="@{/images/Logo-circle.jpg}"/>
 <title>Reports</title>
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Header-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Footer-style.css}" />
+
 </head>
 <body>
+	<div th:include="Header :: body"></div>
+
+	<div th:include="Footer :: body"></div>
 
 </body>
 </html>
