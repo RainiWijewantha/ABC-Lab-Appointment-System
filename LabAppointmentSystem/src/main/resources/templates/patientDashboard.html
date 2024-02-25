@@ -7,9 +7,35 @@
 	th:href="@{/css/Header-style.css}" />
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Footer-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Patient-Dashboard-style.css}" />
 </head>
 <body>
-	<div th:include="Header :: body"></div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<div th:include="Header :: body"></div>
+
+	<div id="content">
+		<div id="content-inner">
+			<main id="contentbar">
+				<div class="article">
+					<p>
+						<script>
+							generateText(12)
+						</script>
+					</p>
+				</div>
+			</main>
+			<nav id="sidebar">
+				<div class="widget">
+					<ul>
+						<li><a th:href="@{/requestMedicalTest}">Request Medical Test</a></li>
+						<li><a th:href="@{/viewAppointmentDetails}">View Appointment Details</a></li>
+						<li><a th:href="@{/reports}">Reports</a></li>
+					</ul>
+				</div>
+			</nav>
+			<div class="clr"></div>
+		</div>
+	</div>
 	<div th:include="Footer :: body"></div>
 </body>
 </html>
