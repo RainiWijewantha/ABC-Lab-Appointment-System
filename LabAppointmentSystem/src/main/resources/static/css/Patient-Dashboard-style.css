@@ -1,68 +1,3 @@
-/* Content */
-#content-inner {
-	margin: 20px;
-	padding: 10px 0;
-	width: 970px;
-	background: #fff;
-}
-
-#content #contentbar {
-	margin: 0;
-	padding: 0;
-	float: right;
-	width: 760px;
-}
-
-#content #contentbar .article {
-	margin: 0 0 24px;
-	padding: 0 20px 0 15px;
-}
-
-#content #sidebar {
-	padding: 0;
-	float: left;
-	width: 200px;
-}
-
-#content #sidebar .widget {
-	margin: 0 0 12px;
-	padding: 8px 8px 8px 13px;
-	line-height: 1.4em;
-}
-
-#content #sidebar .widget h3 a {
-	text-decoration: none;
-}
-
-#content #sidebar .widget ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	color: #959595;
-}
-
-#content #sidebar .widget ul li {
-	margin: 0;
-}
-
-#content #sidebar .widget ul li {
-	padding: 4px 0;
-	width: 185px;
-}
-
-#content #sidebar .widget ul li a {
-	color: black;
-	text-decoration: none;
-	margin-left: -16px;
-	padding: 4px 8px 4px 16px;
-}
-
-#content #sidebar .widget ul li a:hover {
-	color: #99ccff;
-	font-weight: bold;
-	text-decoration: none;
-}
-
 /* Clear both sides to assist with div alignment  */
 .clr {
 	clear: both;
@@ -71,4 +6,97 @@
 	width: 100%;
 	font-size: 0px;
 	line-height: 0px;
+}
+
+/* Menu */
+#top-nav {
+	margin: 0 auto;
+	padding: 0px 0 0;
+	height: 60px;
+	background: #ffffff;
+	width: 100%;
+	font-weight: bolder;
+}
+
+#top-nav ul {
+	list-style: none;
+	padding: 0;
+	height: 37px;
+	float: left;
+}
+
+#top-nav ul li {
+	margin: 0;
+	padding: 0 0 0 8px;
+	float: left;
+}
+
+#top-nav ul li a {
+	display: block;
+	margin: 0;
+	padding: 8px 20px;
+	color: black;
+	text-decoration: none;
+}
+
+#top-nav ul li.active a, #top-nav ul li a:hover {
+	color: #99ccff;
+}
+
+/*Slider*/
+.carousel{
+	position:relative;
+	width:100%;
+	height:80vh;
+	overflow:hidden;
+	box-shadow:5px 10px 15px rgba(0,0,0,0.2);
+}
+
+.img-container{
+	height:100%;
+	display:flex;
+	transform:translateX(0);
+	transition:transform 0.5s ease-in-out;
+}
+
+.img-container img{
+	min-height:100%;
+	min-width:100%;
+	object-fit:cover;
+}
+
+.btn{
+	position:absolute;
+	bottom:20px;
+	width:60px;
+	height:60px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 50%;
+	color:#fff;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	cursor: pointer;
+	transition:background-color 0.2s ease;
+}
+
+.btn-left{
+	left:20px;
+}
+
+.btn-right{
+	right:20px;
+}
+
+.btn:hover{
+	background-color: rgba(0,0,0,0.5);
+}
+
+.icon{
+	transition:scale 0.2s ease;
+}
+
+.btn:hover icon{
+	scale:1.3;
 }
