@@ -60,4 +60,9 @@ public class CredentialsController {
 	public String Login() {
 		return "Login";
 	}
+	
+	@RequestMapping("/dashboard")
+	public String Dashboard() {
+		return "Dashboard";
+	}
 }
