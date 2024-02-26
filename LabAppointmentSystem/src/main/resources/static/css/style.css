@@ -18,7 +18,7 @@
 .form-page {
 	position: relative;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
 	padding: 30px 0px;
