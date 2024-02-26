@@ -65,4 +65,19 @@ public class CredentialsController {
 	public String Dashboard() {
 		return "Dashboard";
 	}
+	
+	@RequestMapping("/addUser")
+	public String AddUser() {
+		return "AddUser";
+	}
+	
+	@RequestMapping("/updateUser")
+	public String UpdateUser() {
+		return "UpdateUser";
+	}
+	
+	@RequestMapping("/deleteUser")
+	public String DeleteUser() {
+		return "DeleteUser";
+	}
 }
