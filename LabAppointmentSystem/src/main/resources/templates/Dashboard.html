@@ -58,7 +58,7 @@
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="">Add User</a> <a
+						<a class="collapse-item" href="/addUser" target="_blank">Add User</a> <a
 							class="collapse-item" href="">Modify User</a> <a
 							class="collapse-item" href="">Delete User</a>
 					</div>
@@ -265,14 +265,14 @@
 	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
-	<script src="js/admin.js"></script>
+	<script src="" th:src="@{/js/admin.js}"></script>
 
 	<!-- Page level plugins -->
 	<script src="vendor/chart.js/Chart.min.js"></script>
 
 	<!-- Page level custom scripts -->
-	<script src="js/chart-area-demo.js"></script>
-	<script src="js/chart-pie-demo.js"></script>
+	<script src="" th:src="@{/js/chart-area-demo.js}"></script>
+	<script src="" th:src="@{/js/chart-pie-demo.js}"></script>
 
 
 </body>
