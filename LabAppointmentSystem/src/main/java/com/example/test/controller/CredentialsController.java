@@ -8,22 +8,22 @@ public class CredentialsController {
 
 	@RequestMapping("/patientLogin")
 	public String example() {
-		return "patientLogin";
+		return "PatientLogin";
 	}
 	
 	@RequestMapping("/register")
 	public String example1() {
-		return "register";
+		return "Register";
 	}
 	
 	@RequestMapping("/forgotPassword")
 	public String example2() {
-		return "forgotPassword";
+		return "ForgotPassword";
 	}
 	
 	@RequestMapping("/newPassword")
 	public String example3() {
-		return "newPassword";
+		return "NewPassword";
 	}
 	
 	@RequestMapping("/header")
@@ -38,7 +38,7 @@ public class CredentialsController {
 	
 	@RequestMapping("/patientDashboard")
 	public String example6() {
-		return "patientDashboard";
+		return "PatientDashboard";
 	}
 	
 	@RequestMapping("/requestMedicalTest")
@@ -54,5 +54,10 @@ public class CredentialsController {
 	@RequestMapping("/reports")
 	public String Reports() {
 		return "Reports";
+	}
+	
+	@RequestMapping("/login")
+	public String Login() {
+		return "Login";
 	}
 }
