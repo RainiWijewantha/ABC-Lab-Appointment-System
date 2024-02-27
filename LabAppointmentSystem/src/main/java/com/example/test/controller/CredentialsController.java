@@ -80,4 +80,14 @@ public class CredentialsController {
 	public String DeleteUser() {
 		return "DeleteUser";
 	}
+	
+	@RequestMapping("/message")
+	public String Message() {
+		return "Message";
+	}
+	
+	@RequestMapping("/pay")
+	public String Pay() {
+		return "Payment";
+	}
 }

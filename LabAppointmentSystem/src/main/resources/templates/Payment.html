@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href=""
+	th:href="@{/images/Logo-circle.jpg}" />
+<title>Payment</title>
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Header-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Footer-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Payment-style.css}" />
+
+</head>
+<body>
+
+	<div th:include="Header :: body"></div>
+
+	<div class="form-page">
+		<div class="form-box">
+			<div class="form-title">
+				<h3>Payment</h3>
+			</div>
+			<div class="form-body">
+				<form action="" method="POST">
+					<div class="form-group">
+						<label for="name">Card Number</label> <input type="name"
+							id="name" name="name" class="input-text" placeholder="Card Numbere">
+					</div>
+					<div class="form-group">
+						<label for="card_name">Card Holder Name</label> <input type="name" id="card_name"
+							name="card_name" class="input-text" placeholder="Card Holder Name">
+					</div>
+					<div class="form-group">
+						<label for="vcc">VCC</label> <input type="name"
+							id="vcc" name="vcc" class="input-text"
+							placeholder="VCC">
+					</div>
+					<div class="form-group">
+						<label for="expr_date">Expired Date</label> <input type="name"
+							id="expr_date" name="expr_date" class="input-text"
+							placeholder="Expired Date">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="input-btn">Pay</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="Footer :: body"></div>
+</body>
+
+</html>

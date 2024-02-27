@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="icon" type="image/png" href=""
+	th:href="@{/images/Logo-circle.jpg}" />
+<title>Message</title>
+
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Message-style.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+
+</head>
+<body>
+
+	<section class="banner-area relative" id="home">
+		<div class="container">
+			<div class="row fullscreen align-items-center justify-content-center">
+				<div class="banner-content col-lg-6 col-md-12">
+					<h1 class="text-uppercase">
+						We are the team <br> of excellence
+					</h1>
+					<p>To confirm the appointment, you must make the payment
+						related to the appointment. For that, you must first login to our
+						system. If you like it, you can click the login button and
+						continue.</p>
+					<a th:href="@{/patientLogin}"><button class="primary-btn2 mt-20 text-uppercase ">
+						Login
+					</button></a>
+					<a th:href="@{/patientDashboard}"><button class="primary-btn2 mt-20 text-uppercase ">
+						Cancel
+					</button></a>
+
+				</div>
+				<div class="col-lg-6 d-flex align-self-end img-right">
+					<img class="img-fluid" th:src="@{images/header-img.png}" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+</body>
+</html>
