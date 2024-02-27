@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="icon" type="image/png" href=""
+	th:href="@{/images/Logo-circle.jpg}" />
+<title>User Data</title>
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Header-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Footer1-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/ViewAppointmentDetails-style.css}" />
+
+</head>
+<body class="body1">
+	<div th:include="Header :: body"></div>
+
+	<div class="container">
+		<h2>User Data</h2>
+		<ul class="responsive-table">
+			<li class="table-header">
+				<div class="col col-1">User Name</div>
+				<div class="col col-2">Email</div>
+				<div class="col col-3">Address</div>
+				<div class="col col-4">Phone Number</div>
+				<div class="col col-4">Actions</div>
+			</li>
+			
+		</ul>
+	</div>
+
+	<div th:include="Footer1 :: body"></div>
+
+</body>
+</html>

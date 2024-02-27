@@ -76,11 +76,6 @@ public class CredentialsController {
 		return "UpdateUser";
 	}
 	
-	@RequestMapping("/deleteUser")
-	public String DeleteUser() {
-		return "DeleteUser";
-	}
-	
 	@RequestMapping("/message")
 	public String Message() {
 		return "Message";
@@ -89,5 +84,20 @@ public class CredentialsController {
 	@RequestMapping("/pay")
 	public String Pay() {
 		return "Payment";
+	}
+	
+	@RequestMapping("/userData")
+	public String UserData() {
+		return "UserData";
+	}
+	
+	@RequestMapping("/footer1")
+	public String Footer1() {
+		return "Footer1";
+	}
+	
+	@RequestMapping("/addTestResults")
+	public String AddTestResults() {
+		return "AddTestResults";
 	}
 }
