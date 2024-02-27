@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href=""
+	th:href="@{/images/Logo-circle.jpg}" />
+<title>Add Test Results</title>
+
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Header-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/Footer1-style.css}" />
+<link rel="stylesheet" type="text/css" href=""
+	th:href="@{/css/AddTestResults-style.css}" />
+
+</head>
+<body>
+
+	<div th:include="Header :: body"></div>
+
+	<div class="container">
+		<div class="card">
+			<h3>Upload Files</h3>
+			<div class="drop_box">
+				<header>
+					<h4>Select File here</h4>
+				</header>
+				<p>Files Supported: PDF, TEXT, DOC , DOCX</p>
+				<input type="file" hidden accept=".doc,.docx,.pdf" id="fileID"
+					style="display: none;">
+				<button class="btn">Choose File</button>
+			</div>
+
+		</div>
+	</div>
+
+	<div th:include="Footer1 :: body"></div>
+
+	<script src="" th:src="@{/js/add-test-results.js}"></script>
+
+</body>
+
+</html>
