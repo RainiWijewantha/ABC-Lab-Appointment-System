@@ -100,4 +100,14 @@ public class CredentialsController {
 	public String AddTestResults() {
 		return "AddTestResults";
 	}
+	
+	@RequestMapping("/doctorLogin")
+	public String DoctorLogin() {
+		return "DoctorLogin";
+	}
+	
+	@RequestMapping("/testResults")
+	public String ViewTestResults() {
+		return "ViewTestResults";
+	}
 }
