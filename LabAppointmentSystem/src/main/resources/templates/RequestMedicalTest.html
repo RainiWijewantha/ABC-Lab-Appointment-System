@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <link rel="icon" type="image/png" href="" th:href="@{/images/Logo-circle.jpg}"/>
@@ -22,7 +22,7 @@
 				<h3>Request Medical Test</h3>
 			</div>
 			<div class="form-body">
-				<form action="" method="POST">
+				<form th:action="@{/next}" method="POST">
 					<div class="form-group">
 						<label for="name">Patient Full Name</label> <input type="name"
 							id="name" name="name" class="input-text" placeholder="Full Name">
