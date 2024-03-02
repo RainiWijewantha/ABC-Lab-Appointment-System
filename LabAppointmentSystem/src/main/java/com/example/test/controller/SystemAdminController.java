@@ -43,4 +43,9 @@ public class SystemAdminController {
 	public String addTestResults() {
 		return "AddTestResults";
 	}
+	
+	@GetMapping("/appointmentSchedule")
+	public String appointmentSchedule() {
+		return "AppointmentSchedule";
+	}
 }
