@@ -38,6 +38,11 @@ public class UserController {
 	public String aboutUs() {
 		return "AboutUs"; 
 	}
+	
+	@GetMapping("/contactUs") 
+	public String contactUs() {
+		return "ContactUs"; 
+	}
 
 	@GetMapping("/register")
 	public String patientRegister() {
