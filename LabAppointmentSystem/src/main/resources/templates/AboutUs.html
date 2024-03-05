@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="icon" type="image/png" href=""
+	th:href="@{/images/Logo-circle.jpg}" />
+
+<title>About Us</title>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" th:href="@{css/swiper.min.css}">
+
+<!-- Styles -->
+<link rel="stylesheet" th:href="@{css/style1.css}">
+</head>
+<body class="single-page">
+	<header class="site-header">
+		<div class="nav-bar">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-12 d-flex flex-wrap justify-content-between align-items-center">
+						<div class="site-branding d-flex align-items-center">
+							<a class="d-block" href="index.html" rel="home"><img
+								class="d-block" th:src="@{images/Logo.jpg}" alt="logo"></a>
+						</div>
+						<!-- .site-branding -->
+
+						<div class="hamburger-menu d-lg-none">
+							<span></span> <span></span> <span></span> <span></span>
+						</div>
+						<!-- .hamburger-menu -->
+					</div>
+					<!-- .col -->
+				</div>
+				<!-- .row -->
+			</div>
+			<!-- .container -->
+		</div>
+		<!-- .nav-bar -->
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h1>About us</h1>
+				</div>
+			</div>
+		</div>
+
+		<img class="header-img" th:src="@{images/about-bg.png}" alt="">
+	</header>
+	<!-- .site-header -->
+
+	<div class="med-history">
+		<div class="container">
+			<div class="row align-items-end">
+				<div class="col-12 col-lg-6">
+					<h2>WELCOME TO ABC LABORATORY</h2>
+
+					<p>Welcome to our new website. We encourage you to find out more about the values and vision that guide us, the services and programs we offer, the indicators that ensure our continued accountability and transparency, and the news and events that matter most to you. ABC Laboratory has a proud tradition of care. For so many years, ABC Laboratory has cared for the people of Matara, surrounding communities, and beyond, being a significant player within the district.</p>
+
+				</div>
+
+				<div class="col-12 col-lg-6 mt-5 mt-lg-0">
+					<img class="responsive" th:src="@{images/about.jpg}" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="medical-team">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<h2>The Medical Team</h2>
+				</div>
+
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="medical-team-wrap">
+						<img th:src="@{images/team-1.jpg}" alt="">
+
+						<h4>Christinne Smith</h4>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+					<div class="medical-team-wrap">
+						<img th:src="@{images/team-2.jpg}" alt="">
+
+						<h4>Anna Gustav</h4>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+					<div class="medical-team-wrap">
+						<img th:src="@{images/team-3.jpg}" alt="">
+
+						<h4>Phillip Williams</h4>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+					<div class="medical-team-wrap">
+						<img th:src="@{images/team-4.jpg}" alt="">
+
+						<h4>Gina James</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="subscribe-banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8 offset-lg-2">
+					<h2>Subscribe to our newsletter</h2>
+
+					<form>
+						<input type="email" placeholder="E-mail address"> <input
+							class="button gradient-bg" type="submit" value="Subscribe">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="site-footer">
+		<div class="footer-widgets">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-4">
+						<div class="foot-about">
+							<h2>
+								<a href="#"><img th:src="@{images/Logo.jpg}" alt=""></a>
+							</h2>
+
+							<p>To provide each patient with the world-class care, exceptional service, and compassion we would want for our loved ones, and to lead the evolution of healthcare to enable every member of the communities we serve to enjoy a better, healthier life.</p>
+
+							<div th:include="Footer1 :: body"></div>
+
+						</div>
+						<!-- .foot-about -->
+					</div>
+					<!-- .col -->
+
+					<div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0">
+						<div class="foot-contact">
+							<h2>Contact</h2>
+
+							<ul class="p-0 m-0">
+								<li><span>Address:</span>Main road, Matara</li>
+								<li><span>Phone:</span>0415698237</li>
+								<li><span>Email:</span>abc.laboratory.service@gmail.com</li>
+							</ul>
+						</div>
+					</div>
+					<!-- .col -->
+
+					<div class="col-12 col-md-6 col-lg-4 mt-5 mt-md-0">
+						<div class="foot-links">
+							<h2>Useful Links</h2>
+
+							<ul class="p-0 m-0">
+								<li><a href="/">Home</a></li>
+								<li><a href="/requestMedicalTest">Request Medical Test</a></li>
+								<li><a href="/viewAppointmentDetails">View Appointment Details</a></li>
+								<li><a href="/reports">Reports</a></li>
+								<li><a href="">Contact Us</a></li>
+								<li><a href="#">About Us</a></li>
+							</ul>
+						</div>
+						<!-- .foot-links -->
+					</div>
+					<!-- .col -->
+				</div>
+				<!-- .row -->
+			</div>
+			<!-- .container -->
+		</div>
+		<!-- .footer-widgets -->
+	</footer>
+	<!-- .site-footer -->
+
+	<script type='text/javascript' th:src='@{/js/jquery.js}'></script>
+	<script type='text/javascript' th:src='@{/js/jquery.collapsible.min.js}'></script>
+	<script type='text/javascript' th:src='@{/js/swiper.min.js}'></script>
+	<script type='text/javascript' th:src='@{/js/jquery.countdown.min.js}'></script>
+	<script type='text/javascript' th:src='@{/js/circle-progress.min.js}'></script>
+	<script type='text/javascript' th:src='@{/js/jquery.countTo.min.js}'></script>
+	<script type='text/javascript' th:src='@{/js/jquery.barfiller.js}'></script>
+	<script type='text/javascript' th:src='@{/js/custom.js}'></script>
+</body>
+</html>

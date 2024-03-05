@@ -33,6 +33,11 @@ public class UserController {
 	public String reports() {
 		return "Reports";
 	}
+	
+	@GetMapping("/aboutUs") 
+	public String aboutUs() {
+		return "AboutUs"; 
+	}
 
 	@GetMapping("/register")
 	public String patientRegister() {
@@ -83,5 +88,7 @@ public class UserController {
 	public String processNewPassword() {
 		return "redirect:/patientLogin"; 
 	}
+	
+	
 
 }
