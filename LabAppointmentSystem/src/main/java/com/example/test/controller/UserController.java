@@ -1,8 +1,12 @@
 package com.example.test.controller;
 
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,10 +50,10 @@ public class UserController {
 		return "ContactUs"; 
 	}
 
-	@GetMapping("/register")
+	/*@GetMapping("/register")
 	public String patientRegister() {
 		return "Register";
-	}
+	}*/
 
 	@GetMapping("/message")
 	public String message() {
@@ -96,37 +100,54 @@ public class UserController {
 		return "redirect:/patientLogin"; 
 	}
 
+	@GetMapping("/register")
+	public String patientRegister(Model model) {
+		model.addAttribute("userModel", new UserModel());
+		return "Register";
+	}
+
 	@PostMapping("/register")
 	public String registerUser(@ModelAttribute("userModel") UserModel userModel, Model model) {
 
+
 		// If validation fails, return back to the register page with an error message
-		if (userModel == null || userModel.getFull_name() == null || userModel.getFull_name().isEmpty() ||
+		if (userModel == null || userModel.getFullname() == null || userModel.getFullname().isEmpty() ||
 				userModel.getEmail() == null || userModel.getEmail().isEmpty() ||
 				userModel.getAddress() == null || userModel.getAddress().isEmpty() ||
-				userModel.getPhone_number() == null || userModel.getPhone_number().isEmpty() ||
+				userModel.getPhonenumber() == null || userModel.getPhonenumber().isEmpty() ||
 				userModel.getPassword() == null || userModel.getPassword().isEmpty() ||
-				userModel.getComfirm_password() == null || userModel.getComfirm_password().isEmpty()) {
+				userModel.getConfirmpassword() == null || userModel.getConfirmpassword().isEmpty()) {
 			model.addAttribute("message", "Error: All fields are required.");
 			return "Register";
 		}
 
 		// Check if password and confirm password match
-		else if (!userModel.getPassword().equals(userModel.getComfirm_password())) {
+		else if (!userModel.getPassword().equals(userModel.getConfirmpassword())) {
 			model.addAttribute("message", "Error: Passwords do not match.");
 			return "Register";
 		}
+
+		else if (!isValidEmail(userModel.getEmail())) {
+			model.addAttribute("message", "Error: Please give Valid email.");
+			return "Register";
+		}
+
 		else {
 			// If everything is fine, proceed with registration
 			userService.save(userModel);
 
-			// Optionally, you can add a success message
+			// success message
 			model.addAttribute("message", "Success: Registration successful!");
 
-			// Redirect to login page or any other appropriate page
+			// Redirect to login page 
 			return "redirect:/patientLogin";
 		}
+	}
 
-
+	private boolean isValidEmail(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+		Pattern pattern = Pattern.compile(emailRegex);
+		return pattern.matcher(email).matches();
 	}
 
 

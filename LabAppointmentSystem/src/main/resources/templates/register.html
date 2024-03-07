@@ -19,38 +19,46 @@
 			<div class="form-body">
 				<!-- Message Box -->
 				<div th:if="${message != null}" class="message-box">
-					<p style="color:red;" th:text="${message}" class="message"></p>
+					<p style="color: red;" th:text="${message}" class="message"></p>
 				</div>
-				<!-- End Message Box --><br/>
-				<form action="#" method="POST" th:object="${UserModel}">
+				<!-- End Message Box -->
+				<br />
+				<form action="#" method="POST" th:object="${userModel}">
 					<div class="form-group">
 						<label for="full_name">Patient Full Name</label> <input
 							type="text" id="full_name" name="full_name" class="input-text"
-							placeholder="Full Name">
+							placeholder="Full Name" th:field="${userModel.fullname}">
+
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label> <input type="email" id="email"
-							name="email" class="input-text" placeholder="Email Address">
+							name="email" class="input-text" placeholder="Email Address"
+							th:field="${userModel.email}"> 
+				
 					</div>
 					<div class="form-group">
 						<label for="address">Address</label> <input type="text"
 							id="address" name="address" class="input-text"
-							placeholder="Address">
+							placeholder="Address" th:field="${userModel.address}">
+			
 					</div>
 					<div class="form-group">
 						<label for="phone_number">Phone Number</label> <input type="text"
 							id="phone_number" name="phone_number" class="input-text"
-							placeholder="Phone Number">
+							placeholder="Phone Number" th:field="${userModel.phonenumber}">
+							
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label> <input type="password"
 							id="password" name="password" class="input-text"
-							placeholder="Password">
+							placeholder="Password" th:field="${userModel.password}">
+						
 					</div>
 					<div class="form-group">
 						<label for="confirm_password">Confirm Password</label> <input
 							type="password" id="confirm_password" name="confirm_password"
-							class="input-text" placeholder="Confirm Password">
+							class="input-text" placeholder="Confirm Password" th:field="${userModel.confirmpassword}">
+							
 					</div>
 					<div class="form-group">
 						<button type="submit" class="input-btn">Register Now</button>

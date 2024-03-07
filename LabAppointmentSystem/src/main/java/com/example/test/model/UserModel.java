@@ -17,24 +17,30 @@ public class UserModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	private String full_name;
+	private String fullname;
 	private String email;
 	private String address;
-	private String phone_number;
+	private String phonenumber;
 	private String password;
-	private String comfirm_password;
+	private String confirmpassword;
 	
 	
-	//constructor
-	public UserModel(Long id, String full_name, String email, String address, String phone_number, String password, String confirm_password) {
+	//defauls constructor
+	public UserModel() {
+
+	}
+
+	//paramiterized constructor
+	public UserModel(Long id, String fullname, String email, String address, String phonenumber, String password,
+			String confirmpassword) {
 		super();
 		Id = id;
-		this.full_name = full_name;
+		this.fullname = fullname;
 		this.email = email;
 		this.address = address;
-		this.phone_number = phone_number;
+		this.phonenumber = phonenumber;
 		this.password = password;
-		this.comfirm_password = confirm_password;
+		this.confirmpassword = confirmpassword;
 	}
 
 	//getters and setters
@@ -48,13 +54,13 @@ public class UserModel {
 	}
 
 
-	public String getFull_name() {
-		return full_name;
+	public String getFullname() {
+		return fullname;
 	}
 
 
-	public void setFull_name(String full_name) {
-		this.full_name = full_name;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 
@@ -78,13 +84,13 @@ public class UserModel {
 	}
 
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 
@@ -98,16 +104,14 @@ public class UserModel {
 	}
 
 
-	public String getComfirm_password() {
-		return comfirm_password;
+	public String getConfirmpassword() {
+		return confirmpassword;
 	}
 
 
-	public void setComfirm_password(String comfirm_password) {
-		this.comfirm_password = comfirm_password;
+	public void setConfirmpassword(String confirmpassword) {
+		this.confirmpassword = confirmpassword;
 	}
-	
-	
 	
 	
 	
