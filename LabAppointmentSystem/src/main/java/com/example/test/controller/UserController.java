@@ -5,11 +5,10 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.test.model.UserModel;
 import com.example.test.service.UserService;
@@ -50,11 +49,6 @@ public class UserController {
 		return "ContactUs"; 
 	}
 
-	/*@GetMapping("/register")
-	public String patientRegister() {
-		return "Register";
-	}*/
-
 	@GetMapping("/message")
 	public String message() {
 		return "Message";
@@ -76,8 +70,22 @@ public class UserController {
 	}
 
 	@PostMapping("/afterLogin")
-	public String afterLogin() {
-		return "redirect:/payment";
+	public String afterLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
+
+		if (email.isEmpty() || password.isEmpty()) {
+			
+	        model.addAttribute("message", "Error: Email and password are required.");
+	        return "PatientLogin";
+	        
+	    } else if (userService.authenticateUser(email, password)) {
+			// Authentication successful, redirect to dashboard or any other page
+			return "redirect:/";
+
+		} else {
+			// Authentication failed, display error message
+			model.addAttribute("message", "Invalid email or password");
+			return "PatientLogin";
+		}
 	}
 
 	@GetMapping("/forgotPassword")
@@ -117,17 +125,21 @@ public class UserController {
 				userModel.getPhonenumber() == null || userModel.getPhonenumber().isEmpty() ||
 				userModel.getPassword() == null || userModel.getPassword().isEmpty() ||
 				userModel.getConfirmpassword() == null || userModel.getConfirmpassword().isEmpty()) {
+
 			model.addAttribute("message", "Error: All fields are required.");
 			return "Register";
 		}
 
 		// Check if password and confirm password match
 		else if (!userModel.getPassword().equals(userModel.getConfirmpassword())) {
+
 			model.addAttribute("message", "Error: Passwords do not match.");
 			return "Register";
 		}
 
+		//email validation
 		else if (!isValidEmail(userModel.getEmail())) {
+
 			model.addAttribute("message", "Error: Please give Valid email.");
 			return "Register";
 		}
@@ -145,7 +157,7 @@ public class UserController {
 	}
 
 	private boolean isValidEmail(String email) {
-		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 		Pattern pattern = Pattern.compile(emailRegex);
 		return pattern.matcher(email).matches();
 	}

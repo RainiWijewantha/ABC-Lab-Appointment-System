@@ -12,6 +12,11 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	public boolean authenticateUser(String email, String password) {
+        UserModel user = userRepository.findByEmail(email);
+        return user != null && user.getPassword().equals(password);
+    }
+	
 	public void save(UserModel u) {
 		
 		userRepository.save(u);
