@@ -1,1 +1,1 @@
-Lab Appointmnet System using Spring boot
+ABC Lab Appointment System using Spring boot
