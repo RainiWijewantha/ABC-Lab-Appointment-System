@@ -18,11 +18,17 @@ public class UserModel {
 	private Long Id;
 	
 	private String fullname;
+	
 	private String email;
+	
 	private String address;
+	
 	private String phonenumber;
+	
 	private String password;
+	
 	private String confirmpassword;
+	
 	
 	
 	//defauls constructor
@@ -112,7 +118,4 @@ public class UserModel {
 	public void setConfirmpassword(String confirmpassword) {
 		this.confirmpassword = confirmpassword;
 	}
-	
-	
-	
 }
