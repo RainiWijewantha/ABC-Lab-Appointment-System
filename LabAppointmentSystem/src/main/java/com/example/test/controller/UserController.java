@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.test.model.UserModel;
+import com.example.test.service.EmailService;
+import com.example.test.service.OTPService;
 import com.example.test.service.UserService;
 
 @Controller
@@ -18,6 +20,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private OTPService otpService;
 
 	@GetMapping("/")
 	public String dashboard() {
@@ -73,13 +81,13 @@ public class UserController {
 	public String afterLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
 
 		if (email.isEmpty() || password.isEmpty()) {
-			
-	        model.addAttribute("message", "Error: Email and password are required.");
-	        return "PatientLogin";
-	        
-	    } else if (userService.authenticateUser(email, password)) {
+
+			model.addAttribute("message", "Error: Email and password are required.");
+			return "PatientLogin";
+
+		} else if (userService.authenticateUser(email, password)) {
 			// Authentication successful, redirect to dashboard or any other page
-			return "redirect:/";
+			return "redirect:/payment";
 
 		} else {
 			// Authentication failed, display error message
@@ -94,18 +102,69 @@ public class UserController {
 	}
 
 	@PostMapping("/forgotPassword")
-	public String processForgotPassword() {
-		return "redirect:/newPassword";
+	public String processForgotPassword(@RequestParam("email") String email, Model model) {
+
+		// Check if email field is empty
+		if (email == null || email.isEmpty()) {
+			model.addAttribute("message", "Error: Email field required.");
+			return "ForgotPassword";
+		}
+
+		// Validate email format
+		else if (!isValidEmail(email)) {
+			model.addAttribute("message", "Error: Please provide a valid email address.");
+			return "ForgotPassword";
+		}
+
+		// Check if email exists in the database
+		else if (userService.emailExists(email)) {
+
+			// Generate and save OTP
+			String otp = otpService.generateOTP();
+			otpService.saveOTP(email, otp);
+
+			// Send OTP via email
+			String subject = "Password Reset OTP";
+			String message = "Your OTP for password reset is: " + otp;
+			emailService.sendSimpleMessage(email, subject, message);
+
+			// Redirect to OTP verification page
+			return "redirect:/verifyOTPPage?email=" + email;			
+		} else {
+
+			model.addAttribute("message", "Email not found. Please enter a valid email address.");
+			return "ForgotPassword";
+		}
+	}
+
+	@GetMapping("/verifyOTPPage")
+	public String showVerifyOTPPage(@RequestParam("email") String email, Model model) {
+		model.addAttribute("email", email);
+		return "VerifyOTP";
+	}
+
+	@PostMapping("/verifyOTP")
+	public String verifyOTP(@RequestParam("email") String email, @RequestParam("otp") String otp, Model model) {
+		if (otpService.verifyOTP(email, otp)) {
+			// OTP verification successful, redirect to new password page
+			return "redirect:/newPassword?email=" + email;
+		} else {
+			model.addAttribute("email", email);
+			model.addAttribute("message", "Invalid OTP. Please try again.");
+			return "VerifyOTP";
+		}
 	}
 
 	@GetMapping("/newPassword")
-	public String newPassword() {
+	public String showNewPasswordPage(@RequestParam("email") String email, Model model) {
+		model.addAttribute("email", email);
 		return "NewPassword";
 	}
 
 	@PostMapping("/newPassword") 
-	public String processNewPassword() {
-		return "redirect:/patientLogin"; 
+	public String processNewPassword(@ModelAttribute("userModel") UserModel userModel) {
+
+		return "redirect:/newPassword"; 
 	}
 
 	@GetMapping("/register")
@@ -145,6 +204,7 @@ public class UserController {
 		}
 
 		else {
+
 			// If everything is fine, proceed with registration
 			userService.save(userModel);
 
