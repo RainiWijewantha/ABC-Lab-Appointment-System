@@ -147,7 +147,7 @@ public class UserController {
 	public String verifyOTP(@RequestParam("email") String email, @RequestParam("otp") String otp, Model model) {
 		if (otpService.verifyOTP(email, otp)) {
 			// OTP verification successful, redirect to new password page
-			return "redirect:/newPassword?email=" + email;
+			return "redirect:/updatePassword";
 		} else {
 			model.addAttribute("email", email);
 			model.addAttribute("message", "Invalid OTP. Please try again.");
@@ -155,17 +155,22 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/newPassword")
-	public String showNewPasswordPage(@RequestParam("email") String email, Model model) {
-		model.addAttribute("email", email);
-		return "NewPassword";
+	@GetMapping("/updatePassword")
+	public String showUpdatePasswordForm() {
+		return "NewPassword"; // Return the update password form
 	}
 
-	@PostMapping("/newPassword") 
-	public String processNewPassword(@ModelAttribute("userModel") UserModel userModel) {
-
-		return "redirect:/newPassword"; 
-	}
+	@PostMapping("/updatePassword")
+    public String updatePassword(@RequestParam(value="email", required=false) String email, @RequestParam("password") String password, Model model) {
+        if (password.isEmpty()) {
+            model.addAttribute("message", "Error: Password field required.");
+            return "UpdatePassword"; // Redirect back to the update password page
+        } else {
+            // Update the password in the database
+            userService.updatePassword(email, password);
+            return "redirect:/patientLogin"; // Redirect to a login page
+        }
+    }
 
 	@GetMapping("/register")
 	public String patientRegister(Model model) {
