@@ -2,6 +2,7 @@ package com.example.test.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.model.UserModel;
 import com.example.test.repository.UserRepository;
@@ -33,4 +34,14 @@ public class UserService {
 	public UserModel findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
+	
+	@Transactional
+	public void updatePassword(String email, String newPassword) {
+        UserModel user = userRepository.findByEmail(email);
+        if (user != null) {
+            // Set the new password without encoding
+            user.setPassword(newPassword);
+            userRepository.save(user);
+        }
+    }
 }
