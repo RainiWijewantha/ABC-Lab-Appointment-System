@@ -45,7 +45,7 @@
 	padding: 30px;
 }
 
-.form-body .url-box{
+.form-body .url-box {
 	display: flex;
 	gap: 10px;
 	justify-content: center;
@@ -69,7 +69,6 @@
 .url-box .url span {
 	color: #4caf50;
 }
-
 
 .form-group {
 	margin-bottom: 1rem;
@@ -110,4 +109,43 @@
 	cursor: pointer;
 	color: var(--light-color);
 	background-color: var(--main-color);
+}
+
+.input-select {
+	width: 100%;
+	padding: 0.8rem;
+	border: 1.5px solid #cccccc;
+	border-radius: 5px;
+	font-weight: 500;
+	color: #626262;
+	appearance: none; /* Removes default dropdown arrow */
+	background-image:
+		url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M7%208L12%2013L17%208H7Z%22%20fill%3D%22%23626262%22%2F%3E%3C%2Fsvg%3E');
+	background-repeat: no-repeat;
+	background-position: right 0.8rem top 50%;
+	background-size: 1.2rem;
+	cursor: pointer;
+}
+
+.input-select:focus {
+	outline-color: var(--main-color);
+}
+
+/* Date Picker */
+.input-date {
+	width: 100%;
+	padding: 0.8rem;
+	border: 1.5px solid #cccccc;
+	border-radius: 5px;
+	font-weight: 500;
+	color: #626262;
+}
+
+.input-date:focus {
+	outline-color: var(--main-color);
+}
+
+/* Hide the default arrow on date input */
+.input-date::-webkit-calendar-picker-indicator {
+	display: none;
 }
