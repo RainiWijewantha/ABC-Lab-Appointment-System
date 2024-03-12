@@ -10,13 +10,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.test.model.AppointmentsModel;
 import com.example.test.model.UserModel;
+import com.example.test.service.AppointmentsService;
 import com.example.test.service.EmailService;
 import com.example.test.service.OTPService;
 import com.example.test.service.UserService;
 
+
 @Controller
 public class UserController {
+
+	@Autowired
+	private AppointmentsService appointmentsService;
 
 	@Autowired
 	private UserService userService;
@@ -30,11 +36,6 @@ public class UserController {
 	@GetMapping("/")
 	public String dashboard() {
 		return "PatientDashboard";
-	}
-
-	@GetMapping("/requestMedicalTest")
-	public String requestMedicalTest() {
-		return "RequestMedicalTest";
 	}
 
 	@GetMapping("/viewAppointmentDetails")
@@ -62,9 +63,43 @@ public class UserController {
 		return "Message";
 	}
 
-	@PostMapping("/next")
+	@GetMapping("/next")
 	public String displayMessage() {
 		return "redirect:/message";
+	}
+	
+	@GetMapping("/requestMedicalTest")
+	public String requestMedicalTest(Model model) {
+		model.addAttribute("appointmentsModel", new AppointmentsModel());
+		return "RequestMedicalTest";
+	}
+
+	@PostMapping("/next")
+	public String saveAppointments(@ModelAttribute("appointmentsModel") AppointmentsModel appointmentsModel, Model model) {
+
+		
+
+		// If validation fails, return back to the register page with an error message
+		if (appointmentsModel == null || appointmentsModel.getPatient_name() == null || appointmentsModel.getPatient_name().isEmpty() ||
+				appointmentsModel.getDoctor_name() == null || appointmentsModel.getDoctor_name().isEmpty() ||
+				appointmentsModel.getTest_type() == null || appointmentsModel.getTest_type().isEmpty() ||
+				appointmentsModel.getDate() == null) {
+
+			model.addAttribute("message", "Error: All fields are required.");
+			return "RequestMedicalTest";
+
+		} else {
+
+			// If everything is fine, proceed with registration
+			appointmentsService.save(appointmentsModel);
+
+			// success message
+			model.addAttribute("message", "Success: Registration successful!");
+
+			// Redirect to login page 
+			return "redirect:/message";
+		}
+
 	}
 
 	@GetMapping("/patientLogin")
@@ -156,21 +191,34 @@ public class UserController {
 	}
 
 	@GetMapping("/updatePassword")
-	public String showUpdatePasswordForm() {
-		return "NewPassword"; // Return the update password form
+	public String showUpdatePasswordForm(@RequestParam("email") String email, Model model) {
+
+		model.addAttribute("email", email);
+		return "NewPassword";
 	}
 
 	@PostMapping("/updatePassword")
-    public String updatePassword(@RequestParam(value="email", required=false) String email, @RequestParam("password") String password, Model model) {
-        if (password.isEmpty()) {
-            model.addAttribute("message", "Error: Password field required.");
-            return "UpdatePassword"; // Redirect back to the update password page
-        } else {
-            // Update the password in the database
-            userService.updatePassword(email, password);
-            return "redirect:/patientLogin"; // Redirect to a login page
-        }
-    }
+	public String updatePasswsord(@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, @RequestParam("email") String email, Model model) {
+
+		if (!password.equals(confirmPassword)) {
+			model.addAttribute("email", email);
+			model.addAttribute("message", "Passwords do not match. Please try again.");
+			return "NewPassword";
+		}
+
+		UserModel user = userService.findByEmail(email);
+		if (user == null) {
+			// Handle error: User not found
+			return "redirect:/forgotPassword";
+		}
+
+		// Update the password for the user
+		user.setPassword(password);
+		userService.save(user);
+
+		// Redirect to the login page
+		return "redirect:/patientLogin";
+	}
 
 	@GetMapping("/register")
 	public String patientRegister(Model model) {
