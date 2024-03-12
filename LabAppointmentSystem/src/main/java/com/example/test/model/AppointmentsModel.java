@@ -8,7 +8,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import java.util.*;
 
 @Getter
 @Setter
@@ -20,7 +19,7 @@ public class AppointmentsModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Long id;
 
 	private String patient_name;
 
@@ -28,7 +27,7 @@ public class AppointmentsModel {
 
 	private String test_type;
 
-	private Date date;
+	private String date;
 
 	//defauls constructor
 	public AppointmentsModel() {
@@ -36,7 +35,7 @@ public class AppointmentsModel {
 	}
 
 	//constructor	
-	public AppointmentsModel(String id, String patient_name, String doctor_name, String test_type, Date date) {
+	public AppointmentsModel(Long id, String patient_name, String doctor_name, String test_type, String date) {
 		super();
 		this.id = id;
 		this.patient_name = patient_name;
@@ -46,11 +45,11 @@ public class AppointmentsModel {
 	}
 
 	//Getters and Setters
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -78,11 +77,11 @@ public class AppointmentsModel {
 		this.test_type = test_type;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
