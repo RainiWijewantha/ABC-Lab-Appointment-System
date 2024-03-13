@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Receipt</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+.header {
+	text-align: center;
+	background-color: #4CAF50;
+	color: white;
+	padding: 20px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.content {
+	padding: 20px;
+}
+
+.content p {
+	margin: 10px 0;
+}
+
+.footer {
+	text-align: center;
+	padding: 10px;
+	background-color: #f0f0f0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<h2>Payment Receipt</h2>
+	<p>
+		Transaction ID: <span th:text="${transactionId}"></span>
+	</p>
+	<p>
+		Date: <span th:text="${date}"></span>
+	</p>
+	<p>
+		Amount: $<span th:text="${amount}"></span>
+	</p>
+</body>
+</html>

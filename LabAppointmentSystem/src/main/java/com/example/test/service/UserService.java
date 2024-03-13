@@ -1,8 +1,9 @@
 package com.example.test.service;
 
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.model.UserModel;
 import com.example.test.repository.UserRepository;
@@ -12,6 +13,13 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	//validate email
+	public boolean isValidEmail(String email) {
+		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+		Pattern pattern = Pattern.compile(emailRegex);
+		return pattern.matcher(email).matches();
+	}
 
 	//Authenticate User
 	public boolean authenticateUser(String email, String password) {
@@ -35,13 +43,13 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
-	@Transactional
-	public void updatePassword(String email, String newPassword) {
+	// Update user's password
+    public void updatePassword(String email, String newPassword) {
         UserModel user = userRepository.findByEmail(email);
         if (user != null) {
-            // Set the new password without encoding
             user.setPassword(newPassword);
             userRepository.save(user);
         }
     }
+	
 }
