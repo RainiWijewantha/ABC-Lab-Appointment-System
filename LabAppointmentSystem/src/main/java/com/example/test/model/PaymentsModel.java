@@ -1,6 +1,8 @@
 package com.example.test.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -16,40 +18,96 @@ import lombok.ToString;
 public class PaymentsModel {
 	
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	private String patient_name;
+	private String transactionId;
+	
+	private String cardNumber;
+	
+	private String cardHolderName;
+	
+	private String vcc;
+	
+	private String expierdDate;
 	
 	private double amount;
 	
 	
-	//costructor
-	public PaymentsModel(String id, String patient_name, double amount) {
+	//default constructor
+	public PaymentsModel() {
+		
+	}
+	
+	//parameterize costructor
+	public PaymentsModel(Long id, String transactionId, String cardNumber, String cardHolderName, String vcc, String expierdDate,
+			double amount) {
 		super();
 		this.id = id;
-		this.patient_name = patient_name;
+		this.transactionId = transactionId;
+		this.cardNumber = cardNumber;
+		this.cardHolderName = cardHolderName;
+		this.vcc = vcc;
+		this.expierdDate = expierdDate;
 		this.amount = amount;
 	}
 	
 	//Getters and Setters
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getPatient_name() {
-		return patient_name;
-	}
-	public void setPatient_name(String patient_name) {
-		this.patient_name = patient_name;
-	}
+
 	public double getAmount() {
 		return amount;
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public String getCardHolderName() {
+		return cardHolderName;
+	}
+
+	public void setCardHolderName(String cardHolderName) {
+		this.cardHolderName = cardHolderName;
+	}
+
+	public String getVcc() {
+		return vcc;
+	}
+
+	public void setVcc(String vcc) {
+		this.vcc = vcc;
+	}
+
+	public String getExpierdDate() {
+		return expierdDate;
+	}
+
+	public void setExpierdDate(String expierdDate) {
+		this.expierdDate = expierdDate;
+	}
+
+	public String getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(String transactionId) {
+		this.transactionId = transactionId;
+	}
+	
 	
 	
 }

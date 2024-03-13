@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,28 +26,53 @@
 				<h3>Payment</h3>
 			</div>
 			<div class="form-body">
-				<form action="" method="POST">
+
+				<!-- Message Box -->
+				<div th:if="${message != null}" class="message-box">
+					<p style="color: red;" th:text="${message}" class="message"></p>
+				</div>
+				<!-- End Message Box -->
+
+				<form th:action="@{/payment}" method="POST"
+					th:object="${paymentsModel}">
+
 					<div class="form-group">
-						<label for="name">Card Number</label> <input type="name"
-							id="number" name="number" class="input-text" placeholder="Card Number">
+						<label for="name">Card Number</label> <input type="text"
+							id="number" name="number" class="input-text"
+							placeholder="Card Number" th:field="${paymentsModel.cardNumber}">
 					</div>
 					<div class="form-group">
-						<label for="card_name">Card Holder Name</label> <input type="name" id="card_name"
-							name="card_name" class="input-text" placeholder="Card Holder Name">
+						<label for="card_name">Card Holder Name</label> <input type="text"
+							id="card_name" name="card_name" class="input-text"
+							placeholder="Card Holder Name"
+							th:field="${paymentsModel.cardHolderName}">
 					</div>
 					<div class="form-group">
-						<label for="vcc">VCC</label> <input type="name"
-							id="vcc" name="vcc" class="input-text"
-							placeholder="VCC">
+						<label for="vcc">VCC</label> <input type="text" id="vcc"
+							name="vcc" class="input-text" placeholder="VCC"
+							th:field="${paymentsModel.vcc}">
 					</div>
 					<div class="form-group">
-						<label for="expr_date">Expired Date</label> <input type="name"
+						<label for="expr_date">Expired Date</label> <input type="text"
 							id="expr_date" name="expr_date" class="input-text"
-							placeholder="Expired Date">
+							placeholder="Expired Date"
+							th:field="${paymentsModel.expierdDate}">
+					</div>
+					<div class="form-group">
+						<label for="amount">Amount</label> <input type="text" id="amount"
+							name="amount" class="input-text" th:value="${formattedAmount}"
+							readonly>
+					</div>
+					<div class="form-group">
+						<label for="transaction_id">Transaction ID</label> <input
+							type="text" id="transaction_id" name="transaction_id"
+							class="input-text" th:value="${transactionId}"
+							readonly>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="input-btn">Pay</button>
 					</div>
+				</form>
 			</div>
 		</div>
 	</div>

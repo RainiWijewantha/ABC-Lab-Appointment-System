@@ -1,6 +1,6 @@
 package com.example.test.controller;
 
-import java.util.regex.Pattern;
+import java.text.DecimalFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.test.model.AppointmentsModel;
+import com.example.test.model.PaymentsModel;
 import com.example.test.model.UserModel;
 import com.example.test.service.AppointmentsService;
 import com.example.test.service.EmailService;
 import com.example.test.service.OTPService;
+import com.example.test.service.PaymentService;
 import com.example.test.service.UserService;
 
 
@@ -32,6 +34,9 @@ public class UserController {
 
 	@Autowired
 	private OTPService otpService;
+	
+	@Autowired
+	private PaymentService paymentService;
 
 	@GetMapping("/")
 	public String dashboard() {
@@ -62,11 +67,6 @@ public class UserController {
 	public String message() {
 		return "Message";
 	}
-
-	@GetMapping("/next")
-	public String displayMessage() {
-		return "redirect:/message";
-	}
 	
 	@GetMapping("/requestMedicalTest")
 	public String requestMedicalTest(Model model) {
@@ -76,8 +76,6 @@ public class UserController {
 
 	@PostMapping("/next")
 	public String saveAppointments(@ModelAttribute("appointmentsModel") AppointmentsModel appointmentsModel, Model model) {
-
-		
 
 		// If validation fails, return back to the register page with an error message
 		if (appointmentsModel == null || appointmentsModel.getPatient_name() == null || appointmentsModel.getPatient_name().isEmpty() ||
@@ -108,9 +106,63 @@ public class UserController {
 	}
 
 	@GetMapping("/payment")
-	public String payment() {
-		return "Payment";
+	public String payment(Model model) {
+		
+		// Generate transaction ID
+	    String transactionId = paymentService.generateTransactionId();
+		
+		double currentAmount = paymentService.getCurrentAmount();
+        DecimalFormat df = new DecimalFormat("#.00");
+        String formattedAmount = df.format(currentAmount);
+        
+        model.addAttribute("transactionId", transactionId);
+        model.addAttribute("formattedAmount", formattedAmount);
+        
+        model.addAttribute("paymentsModel", new PaymentsModel());
+        return "Payment";
 	}
+	
+	@PostMapping("/payment")
+	public String doPayments(@ModelAttribute("paymentsModel") PaymentsModel paymentsModel, Model model) {
+
+
+		// If validation fails, return back to the payment page with an error message
+		if (paymentsModel == null || paymentsModel.getCardNumber() == null || paymentsModel.getCardNumber().isEmpty() ||
+				paymentsModel.getCardHolderName() == null || paymentsModel.getCardHolderName().isEmpty() ||
+				paymentsModel.getVcc() == null || paymentsModel.getVcc().isEmpty() ||
+				paymentsModel.getExpierdDate() == null || paymentsModel.getExpierdDate().isEmpty()) {
+
+			model.addAttribute("message", "Error: All fields are required.");
+			return "Payment";
+		
+		//check card number length
+		} else  if(paymentsModel.getCardNumber().length() !=16){
+			
+			model.addAttribute("message", "Error: please enter correct Card number.");
+			return "Payment";
+		
+		//check vcc number length
+		} else if(paymentsModel.getVcc().length() != 3){
+			
+			model.addAttribute("message", "Error: please enter correct VCC number");
+			return "Payment";
+			
+		//Expired Date validation
+		} else if(!paymentService.isValidExpirationDate(paymentsModel.getExpierdDate())) {
+			
+			model.addAttribute("message", "Error: Invalid expiration date format. Please enter in 'MM/YY' format.");
+			return "Payment";
+			
+		} else {
+		
+			// If everything is fine
+			paymentService.save(paymentsModel);
+
+			// Redirect to dashboard page 
+			return "redirect:/";
+		}
+	}
+
 
 	@PostMapping("/afterLogin")
 	public String afterLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
@@ -146,7 +198,7 @@ public class UserController {
 		}
 
 		// Validate email format
-		else if (!isValidEmail(email)) {
+		else if (!userService.isValidEmail(email)) {
 			model.addAttribute("message", "Error: Please provide a valid email address.");
 			return "ForgotPassword";
 		}
@@ -250,7 +302,7 @@ public class UserController {
 		}
 
 		//email validation
-		else if (!isValidEmail(userModel.getEmail())) {
+		else if (!userService.isValidEmail(userModel.getEmail())) {
 
 			model.addAttribute("message", "Error: Please give Valid email.");
 			return "Register";
@@ -269,12 +321,7 @@ public class UserController {
 		}
 	}
 
-	private boolean isValidEmail(String email) {
-		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-		Pattern pattern = Pattern.compile(emailRegex);
-		return pattern.matcher(email).matches();
-	}
-
+	
 
 
 }

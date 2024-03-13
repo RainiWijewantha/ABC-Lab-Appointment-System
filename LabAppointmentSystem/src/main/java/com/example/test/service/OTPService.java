@@ -23,7 +23,7 @@ public class OTPService {
 
     public boolean verifyOTP(String email, String otp) {
         if (otpMap.containsKey(email) && otpMap.get(email).equals(otp)) {
-            otpMap.remove(email);
+            otpMap.remove(email); // Remove the OTP entry after successful verification
             return true;
         }
         return false;
