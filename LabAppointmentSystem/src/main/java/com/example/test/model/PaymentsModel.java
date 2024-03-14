@@ -1,11 +1,15 @@
 package com.example.test.model;
 
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -36,7 +40,8 @@ public class PaymentsModel {
 	
 	private String email;
 	
-	
+	@Temporal(TemporalType.DATE)
+	private Date date;
 	
 	//default constructor
 	public PaymentsModel() {
@@ -45,7 +50,7 @@ public class PaymentsModel {
 	
 	//parameterize costructor
 	public PaymentsModel(Long id, String transactionId, String cardNumber, String cardHolderName, String vcc,
-			String expierdDate, double amount, String email) {
+			String expierdDate, double amount, String email, Date date) {
 		super();
 		this.id = id;
 		this.transactionId = transactionId;
@@ -55,6 +60,7 @@ public class PaymentsModel {
 		this.expierdDate = expierdDate;
 		this.amount = amount;
 		this.email = email;
+		this.date = date;
 	}
 	
 	//Getters and Setters
@@ -119,6 +125,14 @@ public class PaymentsModel {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	

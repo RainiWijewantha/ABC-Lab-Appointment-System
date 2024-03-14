@@ -15,10 +15,16 @@
 	<div class="form-page">
 		<div class="form-box">
 			<div class="form-title">
-				<h3>Login</h3>
+				<h3>Technician Login</h3>
 			</div>
 			<div class="form-body">
-				<form th:action="@{/doctorLogin}" method="POST">
+
+				<!-- Message Box -->
+				<div th:if="${message != null}" class="message-box">
+					<p style="color: red;" th:text="${message}" class="message"></p>
+				</div>
+				<!-- End Message Box -->
+				<form th:action="@{/technicianLogin}" method="POST">
 
 					<div class="form-group">
 						<label for="username">Username</label> <input type="text"

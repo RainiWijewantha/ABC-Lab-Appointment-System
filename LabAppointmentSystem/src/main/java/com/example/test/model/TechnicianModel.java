@@ -1,6 +1,8 @@
 package com.example.test.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -16,13 +18,15 @@ import lombok.ToString;
 public class TechnicianModel {
 	
 	@Id
-	private String Id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Id;
+	
 	private String userName = "TechAdmin";
 	private String password = "Tech_admin@ABC@123";
 	
 	
 	//constructor
-	public TechnicianModel(String id, String userName, String password) {
+	public TechnicianModel(Long id, String userName, String password) {
 		super();
 		Id = id;
 		this.userName = userName;
@@ -30,10 +34,10 @@ public class TechnicianModel {
 	}
 	
 	//getters and setters
-	public String getId() {
+	public Long getId() {
 		return Id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 	public String getUserName() {
