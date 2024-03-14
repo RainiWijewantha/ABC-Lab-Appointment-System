@@ -84,7 +84,5 @@ public class AppointmentsModel {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
-
-
+	
 }

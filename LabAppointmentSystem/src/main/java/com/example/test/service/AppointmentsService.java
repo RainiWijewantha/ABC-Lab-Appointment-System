@@ -8,7 +8,7 @@ import com.example.test.repository.AppointmentsRepository;
 
 @Service
 public class AppointmentsService {
-
+	
 	@Autowired
 	private AppointmentsRepository appointmentRepository;
 
@@ -16,6 +16,5 @@ public class AppointmentsService {
 	public void save(AppointmentsModel appointmentsModel) {
 		appointmentRepository.save(appointmentsModel);
 	}
-
 
 }

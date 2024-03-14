@@ -14,13 +14,15 @@ import lombok.ToString;
 public class SystemAdminModel {
 	
 	@Id
-	private String Id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Id;
+	
 	private String Username = "SysAdmin";
 	private String Password = "Admin@123";
 	
 	
 	//constructor
-	public SystemAdminModel(String id, String username, String password) {
+	public SystemAdminModel(Long id, String username, String password) {
 		super();
 		Id = id;
 		Username = username;
@@ -28,11 +30,11 @@ public class SystemAdminModel {
 	}
 	
 	//getters and setters
-	public String getId() {
+	public Long getId() {
 		return Id;
 	}
 	
-	public void setId(String id) {
+	public void setId(Long id) {
 		Id = id;
 	}
 	public String getUsername() {
