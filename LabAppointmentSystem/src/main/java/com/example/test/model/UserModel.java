@@ -29,6 +29,8 @@ public class UserModel {
 	
 	private String confirmpassword;
 	
+	private String unique_Id;
+	
 	
 	
 	//defauls constructor
@@ -38,7 +40,7 @@ public class UserModel {
 
 	//paramiterized constructor
 	public UserModel(Long id, String fullname, String email, String address, String phonenumber, String password,
-			String confirmpassword) {
+			String confirmpassword, String unique_Id) {
 		super();
 		Id = id;
 		this.fullname = fullname;
@@ -47,6 +49,7 @@ public class UserModel {
 		this.phonenumber = phonenumber;
 		this.password = password;
 		this.confirmpassword = confirmpassword;
+		this.unique_Id = unique_Id;
 	}
 
 	//getters and setters
@@ -118,4 +121,14 @@ public class UserModel {
 	public void setConfirmpassword(String confirmpassword) {
 		this.confirmpassword = confirmpassword;
 	}
+
+	public String getUnique_Id() {
+		return unique_Id;
+	}
+
+	public void setUnique_Id(String unique_Id) {
+		this.unique_Id = unique_Id;
+	}
+	
+	
 }

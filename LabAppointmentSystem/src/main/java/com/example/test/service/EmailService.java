@@ -50,10 +50,9 @@ public class EmailService {
 	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        String formattedDate = currentDate.format(formatter);
 
-	        // Pass the formatted date to the Thymeleaf template
+	        // Pass the formatted date to the Receipt.html
 	        context.setVariable("date", formattedDate);
 	        
-			//context.setVariable("date", paymentsModel.getDate());
 			context.setVariable("amount", paymentsModel.getAmount());
 			String htmlContent = templateEngine.process("Receipt", context);
 			helper.setText(htmlContent, true);

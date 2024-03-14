@@ -34,7 +34,7 @@ public class UserController {
 
 	@Autowired
 	private OTPService otpService;
-	
+
 	@Autowired
 	private PaymentService paymentService;
 
@@ -67,7 +67,7 @@ public class UserController {
 	public String message() {
 		return "Message";
 	}
-	
+
 	@GetMapping("/requestMedicalTest")
 	public String requestMedicalTest(Model model) {
 		model.addAttribute("appointmentsModel", new AppointmentsModel());
@@ -91,9 +91,6 @@ public class UserController {
 			// If everything is fine, proceed with registration
 			appointmentsService.save(appointmentsModel);
 
-			// success message
-			model.addAttribute("message", "Success: Registration successful!");
-
 			// Redirect to login page 
 			return "redirect:/message";
 		}
@@ -107,21 +104,21 @@ public class UserController {
 
 	@GetMapping("/payment")
 	public String payment(Model model) {
-		
+
 		// Generate transaction ID
-	    String transactionId = paymentService.generateTransactionId();
-		
+		String transactionId = paymentService.generateTransactionId();
+
 		double currentAmount = paymentService.getCurrentAmount();
-        DecimalFormat df = new DecimalFormat("#.00");
-        String formattedAmount = df.format(currentAmount);
-        
-        model.addAttribute("transactionId", transactionId);
-        model.addAttribute("formattedAmount", formattedAmount);
-        
-        model.addAttribute("paymentsModel", new PaymentsModel());
-        return "Payment";
+		DecimalFormat df = new DecimalFormat("#.00");
+		String formattedAmount = df.format(currentAmount);
+
+		model.addAttribute("transactionId", transactionId);
+		model.addAttribute("formattedAmount", formattedAmount);
+
+		model.addAttribute("paymentsModel", new PaymentsModel());
+		return "Payment";
 	}
-	
+
 	@PostMapping("/payment")
 	public String doPayments(@ModelAttribute("paymentsModel") PaymentsModel paymentsModel, Model model) {
 
@@ -134,27 +131,27 @@ public class UserController {
 
 			model.addAttribute("message", "Error: All fields are required.");
 			return "Payment";
-		
-		//check card number length
+
+			//check card number length
 		} else  if(paymentsModel.getCardNumber().length() !=16){
-			
+
 			model.addAttribute("message", "Error: please enter correct Card number.");
 			return "Payment";
-		
-		//check vcc number length
+
+			//check vcc number length
 		} else if(paymentsModel.getVcc().length() != 3){
-			
+
 			model.addAttribute("message", "Error: please enter correct VCC number");
 			return "Payment";
-			
-		//Expired Date validation
+
+			//Expired Date validation
 		} else if(!paymentService.isValidExpirationDate(paymentsModel.getExpierdDate())) {
-			
+
 			model.addAttribute("message", "Error: Invalid expiration date format. Please enter in 'MM/YY' format.");
 			return "Payment";
-			
+
 		} else {
-		
+
 			// If everything is fine
 			paymentService.save(paymentsModel);
 			emailService.sendReceiptEmail(paymentsModel);
@@ -163,7 +160,6 @@ public class UserController {
 			return "redirect:/";
 		}
 	}
-
 
 	@PostMapping("/afterLogin")
 	public String afterLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
@@ -218,7 +214,7 @@ public class UserController {
 
 			// Redirect to OTP verification page
 			return "redirect:/verifyOTPPage?email=" + email;
-			
+
 		} else {
 
 			model.addAttribute("message", "Email not found. Please enter a valid email address.");
@@ -276,7 +272,14 @@ public class UserController {
 
 	@GetMapping("/register")
 	public String patientRegister(Model model) {
+
+		// Generate unique ID
+		String unique_Id = userService.generateUniqueId();
+
+		model.addAttribute("unique_Id", unique_Id);
+
 		model.addAttribute("userModel", new UserModel());
+
 		return "Register";
 	}
 
@@ -308,6 +311,13 @@ public class UserController {
 
 			model.addAttribute("message", "Error: Please give Valid email.");
 			return "Register";
+		} 
+		
+		// Check if email already exists in the database
+		else if (userService.emailExists(userModel.getEmail())) {
+
+			model.addAttribute("message", "Error: Email already exists.");
+			return "Register";
 		}
 
 		else {
@@ -315,15 +325,12 @@ public class UserController {
 			// If everything is fine, proceed with registration
 			userService.save(userModel);
 
-			// success message
-			model.addAttribute("message", "Success: Registration successful!");
-
 			// Redirect to login page 
 			return "redirect:/patientLogin";
 		}
 	}
 
-	
+
 
 
 }
