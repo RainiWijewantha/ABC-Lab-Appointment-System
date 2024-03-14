@@ -7,6 +7,7 @@ import com.example.test.repository.TechnicianRepository;
 
 @Service
 public class TechnicianService {
+	
 	@Autowired
-	private TechnicianRepository doctorRepository;
+	private TechnicianRepository technicianRepository;
 }

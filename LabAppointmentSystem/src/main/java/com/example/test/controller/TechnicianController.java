@@ -1,26 +1,38 @@
 package com.example.test.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import lombok.Getter;
 
 @Controller
 public class TechnicianController {
 
-	@GetMapping("/doctorLogin")
-	public String doctorLogin(){
-		return "DoctorLogin";
+	@GetMapping("/technicianLogin")
+	public String technicianLogin(){
+		return "TechnicianLogin";
 	}
-	
-	@PostMapping("/doctorLogin")
-	public String doctorTestResults() {
-		return "redirect:/testResults";
+
+	@PostMapping("/technicianLogin")
+	public String technicianTestResults(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+		// Check if the provided username and password match the default credentials
+		if ("TechAdmin".equals(username) && "Tech_admin@ABC@123".equals(password)) {
+			return "redirect:/testResults";
+
+		} else if (username.isEmpty() || password.isEmpty()) {
+			model.addAttribute("message", "Error: All fields are required.");
+			return "TechnicianLogin";
+
+		} else {
+			model.addAttribute("message", "Invalid username or password");
+			return "TechnicianLogin";
+		}
 	}
-	
+
 	@GetMapping("/testResults")
-    public String testResults() {
-        return "TestResults";
-    }
+	public String testResults() {
+		return "AddTestResults";
+	}
 }
