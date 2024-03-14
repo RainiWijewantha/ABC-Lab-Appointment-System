@@ -157,6 +157,7 @@ public class UserController {
 		
 			// If everything is fine
 			paymentService.save(paymentsModel);
+			emailService.sendReceiptEmail(paymentsModel);
 
 			// Redirect to dashboard page 
 			return "redirect:/";
@@ -216,7 +217,8 @@ public class UserController {
 			emailService.sendSimpleMessage(email, subject, message);
 
 			// Redirect to OTP verification page
-			return "redirect:/verifyOTPPage?email=" + email;			
+			return "redirect:/verifyOTPPage?email=" + email;
+			
 		} else {
 
 			model.addAttribute("message", "Email not found. Please enter a valid email address.");
