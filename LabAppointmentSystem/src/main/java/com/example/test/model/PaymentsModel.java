@@ -1,5 +1,7 @@
 package com.example.test.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,10 @@ public class PaymentsModel {
 	
 	private double amount;
 	
+	private String email;
+	
+	private LocalDate date;
+	
 	
 	//default constructor
 	public PaymentsModel() {
@@ -40,8 +46,8 @@ public class PaymentsModel {
 	}
 	
 	//parameterize costructor
-	public PaymentsModel(Long id, String transactionId, String cardNumber, String cardHolderName, String vcc, String expierdDate,
-			double amount) {
+	public PaymentsModel(Long id, String transactionId, String cardNumber, String cardHolderName, String vcc,
+			String expierdDate, double amount, String email, LocalDate date) {
 		super();
 		this.id = id;
 		this.transactionId = transactionId;
@@ -50,6 +56,8 @@ public class PaymentsModel {
 		this.vcc = vcc;
 		this.expierdDate = expierdDate;
 		this.amount = amount;
+		this.email = email;
+		this.date = date;
 	}
 	
 	//Getters and Setters
@@ -106,6 +114,22 @@ public class PaymentsModel {
 
 	public void setTransactionId(String transactionId) {
 		this.transactionId = transactionId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	

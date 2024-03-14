@@ -44,8 +44,6 @@ public class PaymentService {
         // Combine the timestamp and random number to create the transaction ID
         String transactionId = "TXN" + timestamp + randomString;
         
-        System.out.println(transactionId);
-
         return transactionId;
     }
 
@@ -63,7 +61,6 @@ public class PaymentService {
 		double defaultAmount = 500.0;
 		Random rand = new Random();
 	    double currentAmount = defaultAmount + rand.nextDouble() * 150.0;
-	    System.out.println("Generated current amount: " + currentAmount);
 	    return currentAmount;
 
 	}

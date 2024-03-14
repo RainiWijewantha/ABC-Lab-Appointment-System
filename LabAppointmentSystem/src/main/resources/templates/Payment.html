@@ -58,6 +58,13 @@
 							placeholder="Expired Date"
 							th:field="${paymentsModel.expierdDate}">
 					</div>
+					
+					<div class="form-group">
+						<label for="email">Email</label> <input
+							type="email" id=email name="email"
+							class="input-text" th:field="${paymentsModel.email}">
+					</div>
+					
 					<div class="form-group">
 						<label for="amount">Amount</label> <input type="text" id="amount"
 							name="amount" class="input-text" th:value="${formattedAmount}"
@@ -69,6 +76,11 @@
 							class="input-text" th:value="${transactionId}"
 							readonly>
 					</div>
+					
+					<div class="form-group">
+						<p style="color: red;">Note: We will send your receipt via email. Please enter correct email address for email field.</p>
+					</div>
+					
 					<div class="form-group">
 						<button type="submit" class="input-btn">Pay</button>
 					</div>
