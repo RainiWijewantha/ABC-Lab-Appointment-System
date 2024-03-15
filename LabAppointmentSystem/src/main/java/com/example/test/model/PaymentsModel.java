@@ -133,7 +133,6 @@ public class PaymentsModel {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	
+	}	
 	
 }

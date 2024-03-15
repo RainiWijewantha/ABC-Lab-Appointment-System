@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.test.model.AppointmentsModel;
+import com.example.test.model.TestResultsModel;
 import com.example.test.model.UserModel;
 import com.example.test.service.AppointmentsService;
-import com.example.test.service.PaymentService;
+import com.example.test.service.SystemAdminService;
+import com.example.test.service.TestResultsService;
 import com.example.test.service.UserService;
+import com.itextpdf.text.Document;
 
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -32,13 +35,16 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SystemAdminController {
 
 	@Autowired
-	private PaymentService paymentService;
-
-	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private AppointmentsService appointmentsService;
+
+	@Autowired
+	private TestResultsService testResultsService;
+
+	@Autowired
+	private SystemAdminService systemAdminService;
 
 
 	@GetMapping("/adminLogin")
@@ -63,22 +69,28 @@ public class SystemAdminController {
 		}
 	}
 
+	
+
 	@GetMapping("/adminDashboard")
 	public String adminDashboard(Model model) {
 		// Get current date
 		Date currentDate = new Date();
 
 		// Get daily income
-		double dailyIncome = paymentService.getDailyIncome(currentDate);
+		double dailyIncome = systemAdminService.getDailyIncome(currentDate);
 		model.addAttribute("dailyIncome", dailyIncome);
 
 		// Get monthly income
-		double monthlyIncome = paymentService.getMonthlyIncome(currentDate);
+		double monthlyIncome = systemAdminService.getMonthlyIncome(currentDate);
 		model.addAttribute("monthlyIncome", monthlyIncome);
 
 		// Get annual income
-		double annualIncome = paymentService.getAnnualIncome();
+		double annualIncome = systemAdminService.getAnnualIncome();
 		model.addAttribute("annualIncome", annualIncome);
+
+		// Get user count
+		long userCount = systemAdminService.getUserCount();
+		model.addAttribute("userCount", userCount);
 
 		return "Dashboard";
 	}
@@ -208,6 +220,57 @@ public class SystemAdminController {
 			e.printStackTrace();
 		}
 	}
+
+	@GetMapping("/testResultsReport")
+	public ModelAndView getAllTestResults() {
+		List<TestResultsModel>list=testResultsService.getAllTestResults();
+		return new ModelAndView("TestResultsReport","test_results",list);
+	}
+
+	@GetMapping("/generateTestResultsReport")
+	public void generateTestResultReport(HttpServletResponse response) {
+
+		try {
+			response.setContentType("application/pdf");
+			response.setHeader("Content-Disposition", "attachment; filename=\"test_results.pdf\"");
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			Document document = new Document(PageSize.A4);
+			PdfWriter.getInstance(document, baos);
+			document.open();
+
+			List<TestResultsModel> testResults = testResultsService.getAllTestResults();
+
+			PdfPTable table = new PdfPTable(5);
+			table.setWidthPercentage(100);
+
+			table.addCell("Id");
+			table.addCell("Patient Name");
+			table.addCell("Test Type");
+			table.addCell("Test Date");
+			//table.addCell("Test Result");
+
+			for (TestResultsModel test : testResults) {
+
+				table.addCell(String.valueOf(test.getId()));
+				table.addCell(test.getPatient_name());
+				table.addCell(test.getTest_date());
+				table.addCell(test.getTest_type());
+			}
+
+			document.add(table);
+
+			document.close();
+
+			response.getOutputStream().write(baos.toByteArray());
+			response.getOutputStream().flush();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 
 
 }

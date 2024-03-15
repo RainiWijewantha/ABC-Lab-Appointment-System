@@ -1,6 +1,7 @@
 package com.example.test.controller;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -153,6 +154,8 @@ public class UserController {
 		} else {
 
 			// If everything is fine
+			// Set the upload date
+			paymentsModel.setDate(new Date());
 			paymentService.save(paymentsModel);
 			emailService.sendReceiptEmail(paymentsModel);
 

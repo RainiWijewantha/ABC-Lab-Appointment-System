@@ -22,4 +22,6 @@ public interface PaymentRepository extends JpaRepository<PaymentsModel, Long> {
 	@Query("SELECT COALESCE(SUM(p.amount), 0) FROM PaymentsModel p WHERE p.date BETWEEN :startDate AND :endDate")
     double getAnnualIncome(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
+	
+
 }
