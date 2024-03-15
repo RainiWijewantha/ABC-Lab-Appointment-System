@@ -2,12 +2,12 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-html, #page {
+html, #page1 {
 	padding: 0;
 	margin: 0;
 }
 
-body {
+#body1 {
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -19,18 +19,17 @@ h1, h2, h3, h4, h5, h6 {
 	color: black;
 }
 
-#page {
+#page1 {
 	background: #fff;
 }
 
-#header, #footer, #top-nav, #content, #content #contentbar, #content #sidebar
-	{
+#header1 {
 	margin: 0;
 	padding: 0;
 }
 
 /* Logo */
-#logo {
+#logo1 {
 	padding: 0;
 	width: 100px;
 	float: left;
@@ -38,34 +37,34 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Header */
-#header {
+#header1 {
 	background: #fff;
 }
 
-#header-inner {
+#header-inner1 {
 	margin: 0 auto;
 	padding: 0;
 	width: 1450px;
 }
 
 /* Feature */
-.feature {
+.feature1 {
 	background: #3c568f;
 	padding: 8px;
 }
 
-.feature-inner {
+.feature-inner1 {
 	margin: auto;
 	width: 970px;
 }
 
-.feature-inner h1 {
+.feature-inner1 h1 {
 	color: black;
 	font-size: 32px;
 }
 
 /* Clear both sides to assist with div alignment  */
-.clr {
+.clr1 {
 	clear: both;
 	padding: 0;
 	margin: 0;

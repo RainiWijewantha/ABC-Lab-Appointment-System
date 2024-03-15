@@ -10,36 +10,53 @@
 	th:href="@{/css/Header-style.css}" />
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Footer1-style.css}" />
+
 <link rel="stylesheet" type="text/css" href=""
-	th:href="@{/css/Reports-style.css}" />
+	th:href="@{/css/bootstrap.min.css}" />
+
+<style>
+.button-container {
+	margin-bottom: 20px; /* Adjust as needed */
+}
+</style>
 
 </head>
 <body>
 	<div th:include="Header :: body"></div>
 
-	<div class="container">
-		<h2>View Appointment Schedule</h2>
-		<ul class="responsive-table">
-			<li class="table-header">
-				<div class="col col-1">Test Type</div>
-				<div class="col col-2">Doctor Name</div>
-				<div class="col col-3">Date</div>
-			</li>
+	<div class="container my-5 col-md-8">
 
-		</ul>
+		<div class="row">
+            <div class="col-md-12 text-md-right button-container">
+                <button class="btn btn-primary">Generate Report</button>
+            </div>
+        </div>
+
+		<table class="table  table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Patient Name</th>
+					<th scope="col">Test Type</th>
+					<th scope="col">Doctor Name (Recommended)</th>
+					<th scope="col">Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="a :${appointments}">
+					<td th:text="${a.id}"></td>
+					<td th:text="${a.patient_name}"></td>
+					<td th:text="${a.test_type}"></td>
+					<td th:text="${a.doctor_name}"></td>
+					<td th:text="${a.date}"></td>
+
+				</tr>
+
+			</tbody>
+		</table>
 	</div>
 
-	<button onclick="generateReport()">Generate Report</button>
-
-	<script>
-		function generateReport() {
-			// Add your logic here to generate the report
-			alert('Generating report...');
-			// You can perform AJAX request or any other action to generate the report
-		}
-	</script>
-
-	<div th:include="Footer1 :: body"></div>
+        <div th:include="Footer1 :: body"></div>
 
 </body>
 </html>

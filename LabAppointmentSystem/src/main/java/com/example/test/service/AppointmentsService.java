@@ -1,5 +1,7 @@
 package com.example.test.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ public class AppointmentsService {
 	//Save User
 	public void save(AppointmentsModel appointmentsModel) {
 		appointmentRepository.save(appointmentsModel);
+	}
+
+	public List<AppointmentsModel> getAllAppointments() {
+		return appointmentRepository.findAll();
 	}
 
 }
