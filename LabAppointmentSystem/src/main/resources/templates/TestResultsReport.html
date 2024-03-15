@@ -10,22 +10,51 @@
 	th:href="@{/css/Header-style.css}" />
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Footer1-style.css}" />
+
+
 <link rel="stylesheet" type="text/css" href=""
-	th:href="@{/css/Reports-style.css}" />
+	th:href="@{/css/bootstrap.min.css}" />
+
+<style>
+.button-container {
+	margin-bottom: 20px;
+}
+</style>
 
 </head>
 <body>
 	<div th:include="Header :: body"></div>
 
-	<div class="container">
-		<h2>View Test Results</h2>
-		<ul class="responsive-table">
-			<li class="table-header">
-				<div class="col col-1">Reports</div>
-				<div class="col col-2">Action</div>
-			</li>
+	<div class="container my-5 col-md-8">
 
-		</ul>
+		<div class="row">
+            <div class="col-md-12 text-md-right button-container">
+                <form action="/generateTestResultsReport" method="get">
+                    <button type="submit" class="btn btn-primary">Generate Report</button>
+                </form>
+            </div>
+        </div>
+
+		<table class="table  table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Patient Name</th>
+					<th scope="col">Test Type</th>
+					<th scope="col">Test Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t :${test_results}">
+					<td th:text="${t.id}"></td>
+					<td th:text="${t.patient_name}"></td>
+					<td th:text="${t.test_type}"></td>
+					<td th:text="${t.test_date}"></td>
+
+				</tr>
+
+			</tbody>
+		</table>
 	</div>
 
 	<div th:include="Footer1 :: body"></div>
