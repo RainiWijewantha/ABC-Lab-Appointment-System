@@ -21,8 +21,8 @@ public class TechnicianModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	private String userName = "TechAdmin";
-	private String password = "Tech_admin@ABC@123";
+	private String userName;
+	private String password;
 	
 	
 	//constructor

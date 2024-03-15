@@ -1,36 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <link rel="icon" type="image/png" href=""
 	th:href="@{/images/Logo-circle.jpg}" />
 <title>User Data</title>
 
+<script src="https://kit.fontawesome.com/0faddc1af8.js"
+	crossorigin="anonymous"></script>
+
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Header-style.css}" />
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Footer1-style.css}" />
-<link rel="stylesheet" type="text/css" href=""
-	th:href="@{/css/ViewAppointmentDetails-style.css}" />
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 
 </head>
 <body class="body1">
 	<div th:include="Header :: body"></div>
 
-	<div class="container">
-		<h2>User Data</h2>
-		<ul class="responsive-table">
-			<li class="table-header">
-				<div class="col col-1">User Name</div>
-				<div class="col col-2">Email</div>
-				<div class="col col-3">Address</div>
-				<div class="col col-4">Phone Number</div>
-				<div class="col col-4">Actions</div>
-			</li>
-			
-		</ul>
-	</div>
+	<div class="container my-5 col-md-8">
+		<table class="table  table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Full Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Address</th>
+					<th scope="col">Phone Number</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="u :${user}">
+					<td th:text="${u.id}"></td>
+					<td th:text="${u.fullname}"></td>
+					<td th:text="${u.email}"></td>
+					<td th:text="${u.address}"></td>
+					<td th:text="${u.phonenumber}"></td>
+					<td><a style="color: blue;"
+						th:href="@{/editUser/{id}(id=${u.id})}"><i
+							class="fa-solid fa-pen-to-square ms-4"></i></a> <a
+						style="color: red;" th:href="@{/deleteUser/{id}(id=${u.id})}"><i
+							class="fa-solid fa-trash ms-4"></i></a></td>
 
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
 	<div th:include="Footer1 :: body"></div>
 
 </body>
