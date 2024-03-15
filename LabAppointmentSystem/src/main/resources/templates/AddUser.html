@@ -26,24 +26,32 @@
 				<h3>Add New User</h3>
 			</div>
 			<div class="form-body">
-				<form th:action="@{/addUser}" method="POST">
+
+				<!-- Message Box -->
+				<div th:if="${message != null}" class="message-box">
+					<p style="color: red;" th:text="${message}" class="message"></p>
+				</div>
+				<!-- End Message Box -->
+				<form th:action="@{/addUser}" method="POST" th:object="${userModel}">
 					<div class="form-group">
-						<label for="name">Patient Full Name</label> <input type="name"
-							id="name" name="name" class="input-text" placeholder="Full Name">
+						<label for="name">Patient Full Name</label> <input type="text"
+							id="full_name" name="full_name" class="input-text"
+							placeholder="Full Name" th:field="${userModel.fullname}">
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label> <input type="email" id="email"
-							name="email" class="input-text" placeholder="Email Address">
+							name="email" class="input-text" placeholder="Email Address"
+							th:field="${userModel.email}">
 					</div>
 					<div class="form-group">
-						<label for="email">Address</label> <input type="address"
-							id="address" name="address" class="input-text"
-							placeholder="Address">
+						<label for="email">Address</label> <input type="text" id="address"
+							name="address" class="input-text" placeholder="Address"
+							th:field="${userModel.address}">
 					</div>
 					<div class="form-group">
-						<label for="phone">Phone Number</label> <input type="phone"
-							id="phone" name="phone" class="input-text"
-							placeholder="Phone Number">
+						<label for="phone">Phone Number</label> <input type="text"
+							id="phone_number" name="phone_number" class="input-text"
+							placeholder="Phone Number" th:field="${userModel.phonenumber}">
 					</div>
 					<div class="form-group">
 						<button type="submit" class="input-btn">Register Now</button>

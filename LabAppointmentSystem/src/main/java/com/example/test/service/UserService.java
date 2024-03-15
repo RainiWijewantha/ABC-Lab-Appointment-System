@@ -92,5 +92,34 @@ public class UserService {
 
 		return unique_Id;
 	}
+	
+	public UserModel getuserById(Long id) {
+		return userRepository.findById((long) id).get();
+	}
+	
+	public void deleteById(int id) {
+		userRepository.deleteById((long) id);
+	}
+
+	public List<UserModel> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+	public void edit(UserModel userModel) {
+
+		 // Get the existing user by ID
+	    UserModel existingUser = userRepository.findById(userModel.getId()).orElse(null);
+	    if (existingUser != null) {
+	        // Update the existing user with the new data
+	        existingUser.setFullname(userModel.getFullname());
+	        existingUser.setEmail(userModel.getEmail());
+	        existingUser.setAddress(userModel.getAddress());
+	        existingUser.setPhonenumber(userModel.getPhonenumber());
+
+	        // Save the updated user
+	        userRepository.save(existingUser);
+	    }
+	}
+
 
 }

@@ -17,8 +17,8 @@ public class SystemAdminModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
-	private String Username = "SysAdmin";
-	private String Password = "Admin@123";
+	private String Username;
+	private String Password;
 	
 	
 	//constructor
