@@ -1,5 +1,6 @@
 package com.example.test.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,14 @@ import com.example.test.service.AppointmentsService;
 import com.example.test.service.PaymentService;
 import com.example.test.service.UserService;
 
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+
 @Controller
 public class SystemAdminController {
 
@@ -28,7 +37,7 @@ public class SystemAdminController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private AppointmentsService appointmentsService;
 
@@ -87,7 +96,7 @@ public class SystemAdminController {
 
 		return "AddUser";
 	}
-	
+
 	@PostMapping("/addUser")
 	public String AddUser(@ModelAttribute("userModel") UserModel userModel, Model model) {
 
@@ -108,7 +117,7 @@ public class SystemAdminController {
 			model.addAttribute("message", "Error: Please give Valid email.");
 			return "AddUser";
 		} 
-		
+
 		// Check if email already exists in the database
 		else if (userService.emailExists(userModel.getEmail())) {
 
@@ -125,40 +134,81 @@ public class SystemAdminController {
 			return "Dashboard";
 		}
 	}
-	
+
 	@GetMapping("/userData")
 	public ModelAndView getAllUsers() {
 		List<UserModel>list=userService.getAllUsers();
 		return new ModelAndView("UserData","user",list);
 	}
-	
+
 	@PostMapping("/edit")
 	public String editUser(@ModelAttribute UserModel userModel) {
 		userService.edit(userModel);
 		return "redirect:/userData";
 	}
-	
+
 	@RequestMapping("/editUser/{id}")
 	public String edituser(@PathVariable("id") Long id,Model model) {
 		UserModel u=userService.getuserById(id);
 		model.addAttribute("userModel",u);
 		return "UpdateUser";
 	}
-	
+
 	@RequestMapping("/deleteUser/{id}")
 	public String deleteUser(@PathVariable("id")int id) {
 		userService.deleteById(id);
 		return "redirect:/userData";
 	}
 
-	/*@GetMapping("/appointmentSchedule")
-	public String appointmentSchedule() {
-		return "AppointmentScheduleReport";
-	}*/
-	
 	@GetMapping("/appointmentSchedule")
 	public ModelAndView getAllAppointments() {
 		List<AppointmentsModel>list=appointmentsService.getAllAppointments();
 		return new ModelAndView("AppointmentScheduleReport","appointments",list);
 	}
+
+	@GetMapping("/generateAppointmentReport")
+	public void generateAppointmentReport(HttpServletResponse response) {
+		try {
+			response.setContentType("application/pdf");
+			response.setHeader("Content-Disposition", "attachment; filename=\"appointment_report.pdf\"");
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			com.itextpdf.text.Document document = new com.itextpdf.text.Document(PageSize.A4);
+			PdfWriter.getInstance(document, baos);
+			document.open();
+
+			List<AppointmentsModel> appointments = appointmentsService.getAllAppointments();
+
+			// Create a table with 5 columns
+			PdfPTable table = new PdfPTable(5);
+
+			// Add table header
+			table.addCell("Id");
+			table.addCell("Patient Name");
+			table.addCell("Test Type");
+			table.addCell("Doctor Name");
+			table.addCell("Date");
+			for (AppointmentsModel appointment : appointments) {
+				table.addCell(String.valueOf(appointment.getId()));
+				table.addCell(appointment.getPatient_name());
+				table.addCell(appointment.getTest_type());
+				table.addCell(appointment.getDoctor_name());
+				table.addCell(appointment.getDate().toString());
+			}
+
+			// Add the table to the document
+			document.add(table);
+
+
+			document.close();
+
+			response.getOutputStream().write(baos.toByteArray());
+			response.getOutputStream().flush();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 }
