@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.test.model.AppointmentsModel;
 import com.example.test.model.UserModel;
+import com.example.test.service.AppointmentsService;
 import com.example.test.service.PaymentService;
 import com.example.test.service.UserService;
 
@@ -26,6 +28,9 @@ public class SystemAdminController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AppointmentsService appointmentsService;
 
 
 	@GetMapping("/adminLogin")
@@ -37,7 +42,7 @@ public class SystemAdminController {
 	public String dashboard(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
 
 		// Check if the provided username and password match the default credentials
-		if ("SysAdmin".equals(username) && "Admin@123".equals(password)) {
+		if ("SysAdmin".equals(username) && "SysAdmin-ABC@123".equals(password)) {
 			return "redirect:/adminDashboard";
 
 		} else if (username.isEmpty() || password.isEmpty()) {
@@ -146,13 +151,14 @@ public class SystemAdminController {
 		return "redirect:/userData";
 	}
 
-	@GetMapping("/addTestResults")
-	public String addTestResults() {
-		return "AddTestResults";
-	}
-
-	@GetMapping("/appointmentSchedule")
+	/*@GetMapping("/appointmentSchedule")
 	public String appointmentSchedule() {
-		return "AppointmentSchedule";
+		return "AppointmentScheduleReport";
+	}*/
+	
+	@GetMapping("/appointmentSchedule")
+	public ModelAndView getAllAppointments() {
+		List<AppointmentsModel>list=appointmentsService.getAllAppointments();
+		return new ModelAndView("AppointmentScheduleReport","appointments",list);
 	}
 }
