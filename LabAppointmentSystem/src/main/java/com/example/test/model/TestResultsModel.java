@@ -1,8 +1,11 @@
 package com.example.test.model;
 
-import java.sql.Blob;
+import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -18,44 +21,84 @@ import lombok.ToString;
 public class TestResultsModel {
 
 	@Id
-	private String id;
-	
-	private String name;
-	
-	private Blob test_doc;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	
-	//constructor
-	public TestResultsModel(String id, String name, Blob test_doc) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.test_doc = test_doc;
-	}
+    private String patient_name;
 
-	//Getters and Setters
-	public String getId() {
-		return id;
-	}
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] testDoc; // Store file data as byte array
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    private Date upload_date;
 
-	public String getName() {
-		return name;
-	}
+    private String test_date;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String test_type;
 
-	public Blob getTest_doc() {
-		return test_doc;
-	}
+    //default constructor
+    public TestResultsModel() {
 
-	public void setTest_doc(Blob test_doc) {
-		this.test_doc = test_doc;
-	}
+    }
+
+    //parameterized constructor
+    public TestResultsModel(Long id, String patient_name, byte[] testDoc, Date upload_date, String test_date,
+            String test_type) {
+        super();
+        this.id = id;
+        this.patient_name = patient_name;
+        this.testDoc = testDoc;
+        this.upload_date = upload_date;
+        this.test_date = test_date;
+        this.test_type = test_type;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPatient_name() {
+        return patient_name;
+    }
+
+    public void setPatient_name(String patient_name) {
+        this.patient_name = patient_name;
+    }
+
+    public byte[] getTestDoc() {
+        return testDoc;
+    }
+
+    public void setTestDoc(byte[] testDoc) {
+        this.testDoc = testDoc;
+    }
+
+    public Date getUpload_date() {
+        return upload_date;
+    }
+
+    public void setUpload_date(Date upload_date) {
+        this.upload_date = upload_date;
+    }
+
+    public String getTest_date() {
+        return test_date;
+    }
+
+    public void setTest_date(String test_date) {
+        this.test_date = test_date;
+    }
+
+    public String getTest_type() {
+        return test_type;
+    }
+
+    public void setTest_type(String test_type) {
+        this.test_type = test_type;
+    }
 
 }
