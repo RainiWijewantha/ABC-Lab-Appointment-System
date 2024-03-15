@@ -22,7 +22,6 @@ import com.example.test.service.PaymentService;
 import com.example.test.service.UserService;
 
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 

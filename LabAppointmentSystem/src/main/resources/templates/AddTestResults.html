@@ -19,26 +19,59 @@
 <body>
 
 	<div th:include="Header :: body"></div>
-
-	<div class="container">
-		<div class="card">
-			<h3>Upload Files</h3>
-			<div class="drop_box">
-				<header>
-					<h4>Select File here</h4>
-				</header>
-				<p>Files Supported: PDF, TEXT, DOC , DOCX</p>
-				<input type="file" hidden accept=".doc,.docx,.pdf" id="fileID"
-					style="display: none;">
-				<button class="btn">Choose File</button>
+	<div class="form-page">
+		<div class="form-box">
+			<div class="form-title">
+				<h3>Add Test Results</h3>
 			</div>
+			<div class="form-body">
 
+				<!-- Message Box -->
+				<div th:if="${message != null}" class="message-box">
+					<p style="color: red;" th:text="${message}" class="message"></p>
+				</div>
+				<!-- End Message Box -->
+
+				<form th:action="@{/testResults}" method="POST" th:object="${testResultsModel}" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label for="patient_name">Patient Name</label> <input type="text"
+							id="patient_name" name="patient_name" class="input-text"
+							placeholder="Patient Name" th:field="${testResultsModel.patient_name}">
+					</div>
+
+					<div class="form-group">
+						<label for="testType">Test Type</label> <select id="testType"
+							name="testType" class="input-select" th:field="${testResultsModel.test_type}">
+							<option value="bloodTest">Blood Test</option>
+							<option value="urineTest">Urine Test</option>
+							<option value="xRay">X-Ray</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="password">Test Date</label> <input type="date"
+							id="test_date" name="test_date" class="input-text"
+							placeholder="Test Date" th:field="${testResultsModel.test_date}">
+					</div>
+
+					<!-- Choose File Input -->
+					<div class="form-group">
+						<label for="file">Select File</label> <input type="file" id="file"
+							name="testDocFile" accept=".pdf" class="input-file">
+					</div>
+					<!-- End Choose File Input -->
+
+					<div class="form-group">
+						<button type="submit" class="input-btn">Submit</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 
 	<div th:include="Footer1 :: body"></div>
-
-	<script src="" th:src="@{/js/add-test-results.js}"></script>
+	<!-- <script src="" th:src="@{/js/add-test-results.js}"></script>-->
 
 </body>
 
