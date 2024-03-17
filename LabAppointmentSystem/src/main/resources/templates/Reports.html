@@ -6,26 +6,48 @@
 	th:href="@{/images/Logo-circle.jpg}" />
 <title>Reports</title>
 
+<script src="https://kit.fontawesome.com/0faddc1af8.js"
+	crossorigin="anonymous"></script>
+
+
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Header-style.css}" />
 <link rel="stylesheet" type="text/css" href=""
 	th:href="@{/css/Footer1-style.css}" />
 <link rel="stylesheet" type="text/css" href=""
-	th:href="@{/css/Reports-style.css}" />
+	th:href="@{/css/bootstrap.min.css}" />
 
 </head>
 <body>
 	<div th:include="Header :: body"></div>
 
-	<div class="container">
-		<h2>Reports</h2>
-		<ul class="responsive-table">
-			<li class="table-header">
-				<div class="col col-1">Reports</div>
-				<div class="col col-2">Action</div>
-			</li>
+	<div class="container my-5 col-md-8">
+		<table class="table  table-striped table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Patient Name</th>
+					<th scope="col">Test Type</th>
+					<th scope="col">Unique Id</th>
+					<th scope="col">Test Date</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="t :${test_results}">
+					<td th:text="${t.id}"></td>
+					<td th:text="${t.patient_name}"></td>
+					<td th:text="${t.test_type}"></td>
+					<td th:text="${t.unique_id}"></td>
+					<td th:text="${t.test_date}"></td>
+					<td><a style="color: gray;"
+						th:href="@{/download/{id}(id=${t.id})}">
+							<i class="fa-solid fa-download ms-5"></i></a></td>
 
-		</ul>
+				</tr>
+
+			</tbody>
+		</table>
 	</div>
 
 	<div th:include="Footer1 :: body"></div>

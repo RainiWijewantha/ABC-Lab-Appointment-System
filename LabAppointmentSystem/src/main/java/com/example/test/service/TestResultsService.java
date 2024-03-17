@@ -18,9 +18,10 @@ public class TestResultsService {
 		return testResultsRepository.findAll();
 	}
 
-	public TestResultsModel getTestResultById(Long id) {
+	public TestResultsModel findById(Long id) {
         Optional<TestResultsModel> resultOptional = testResultsRepository.findById(id);
-        return resultOptional.orElse(null);
+        return resultOptional.orElse(null); // Return the entity if found, or null if not found
     }
 
+	
 }

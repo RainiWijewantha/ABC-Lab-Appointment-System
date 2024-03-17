@@ -2,22 +2,31 @@ package com.example.test.controller;
 
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.test.model.AppointmentsModel;
 import com.example.test.model.PaymentsModel;
+import com.example.test.model.TestResultsModel;
 import com.example.test.model.UserModel;
 import com.example.test.service.AppointmentsService;
 import com.example.test.service.EmailService;
 import com.example.test.service.OTPService;
 import com.example.test.service.PaymentService;
+import com.example.test.service.TestResultsService;
 import com.example.test.service.UserService;
 
 
@@ -38,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	private PaymentService paymentService;
+	
+	@Autowired
+	private TestResultsService testResultsService;
 
 	@GetMapping("/")
 	public String dashboard() {
@@ -332,8 +344,36 @@ public class UserController {
 			return "redirect:/patientLogin";
 		}
 	}
+	
+	@GetMapping("/testData")
+	public ModelAndView getAllTestData() {
+		List<TestResultsModel>list=testResultsService.getAllTestResults();
+		return new ModelAndView("Reports","test_results",list);
+	}
 
+	@GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadPDF(@PathVariable Long id) {
+        // Retrieve the TestResultsModel by ID from the database
+        TestResultsModel testResult = testResultsService.findById(id);
 
+        // Check if the test result exists
+        if (testResult == null) {
+            // Return 404 Not Found if the test result does not exist
+            return ResponseEntity.notFound().build();
+        }
 
+        // Retrieve the PDF content from the test result
+        byte[] pdfContent = testResult.getTestDoc();
+
+        // Set the HTTP headers for the response
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDisposition(ContentDisposition.builder("attachment").filename("test_result.pdf").build());
+
+        // Return the PDF content as a ResponseEntity
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(pdfContent);
+    }
 
 }
