@@ -247,9 +247,8 @@ public class UserController {
 	public String verifyOTP(@RequestParam("email") String email, @RequestParam("otp") String otp, Model model) {
 		if (otpService.verifyOTP(email, otp)) {
 			// OTP verification successful, redirect to new password page
-			return "redirect:/updatePassword";
+			return "redirect:/updatePassword?email=" + email;
 		} else {
-			model.addAttribute("email", email);
 			model.addAttribute("message", "Invalid OTP. Please try again.");
 			return "VerifyOTP";
 		}
@@ -279,6 +278,7 @@ public class UserController {
 
 		// Update the password for the user
 		user.setPassword(password);
+		user.setConfirmpassword(confirmPassword);
 		userService.save(user);
 
 		// Redirect to the login page
