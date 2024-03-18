@@ -30,6 +30,7 @@ import com.example.test.service.TestResultsService;
 import com.example.test.service.UserService;
 
 
+
 @Controller
 public class UserController {
 
@@ -53,12 +54,8 @@ public class UserController {
 
 	@GetMapping("/")
 	public String dashboard() {
+	
 		return "PatientDashboard";
-	}
-
-	@GetMapping("/viewAppointmentDetails")
-	public String viewAppointmentDetails() {
-		return "ViewAppointmentDetails";
 	}
 
 	@GetMapping("/reports")
