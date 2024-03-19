@@ -166,7 +166,7 @@ public class SystemAdminController {
 	}
 
 	@RequestMapping("/deleteUser/{id}")
-	public String deleteUser(@PathVariable("id")int id) {
+	public String deleteUser(@PathVariable("id")Long id) {
 		userService.deleteById(id);
 		return "redirect:/userData";
 	}

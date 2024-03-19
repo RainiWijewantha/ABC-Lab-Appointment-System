@@ -22,6 +22,7 @@ public class TechnicianModel {
 	private Long Id;
 	
 	private String userName;
+	
 	private String password;
 	
 	

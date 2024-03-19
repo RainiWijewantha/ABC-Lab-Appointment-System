@@ -32,12 +32,6 @@ public class UserService {
 	}
 
 	//Authenticate User
-	/*public boolean authenticateUser(String email, String password) {
-		UserModel user = userRepository.findByEmail(email);
-		return user != null && user.getPassword().equals(password);
-	}*/
-
-	//Authenticate User
 	public boolean authenticateUser(String email, String password) {
 		List<UserModel> users = userRepository.findAllByEmail(email);
 		for (UserModel user : users) {
@@ -97,8 +91,8 @@ public class UserService {
 		return userRepository.findById((long) id).get();
 	}
 	
-	public void deleteById(int id) {
-		userRepository.deleteById((long) id);
+	public void deleteById(Long id) {
+		userRepository.deleteById(id);
 	}
 
 	public List<UserModel> getAllUsers() {
