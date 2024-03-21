@@ -140,24 +140,35 @@ public class UserController {
 				paymentsModel.getExpierdDate() == null || paymentsModel.getExpierdDate().isEmpty()) {
 
 			model.addAttribute("message", "Error: All fields are required.");
-			return "Payment";
+			// Add transaction ID and formatted amount to the model to preserve their values
+	        model.addAttribute("transactionId", paymentService.generateTransactionId());
+	        model.addAttribute("formattedAmount", paymentService.getCurrentAmount());
+	        return "Payment";
 
 			//check card number length
 		} else  if(paymentsModel.getCardNumber().length() !=16){
 
 			model.addAttribute("message", "Error: please enter correct Card number.");
+			// Add transaction ID and formatted amount to the model to preserve their values
+	        model.addAttribute("transactionId", paymentService.generateTransactionId());
+	        model.addAttribute("formattedAmount", paymentService.getCurrentAmount());
 			return "Payment";
 
 			//check vcc number length
 		} else if(paymentsModel.getVcc().length() != 3){
 
-			model.addAttribute("message", "Error: please enter correct VCC number");
+			model.addAttribute("message", "Error: please enter correct VCC number");// Add transaction ID and formatted amount to the model to preserve their values
+	        model.addAttribute("transactionId", paymentService.generateTransactionId());
+	        model.addAttribute("formattedAmount", paymentService.getCurrentAmount());
 			return "Payment";
 
 			//Expired Date validation
 		} else if(!paymentService.isValidExpirationDate(paymentsModel.getExpierdDate())) {
 
 			model.addAttribute("message", "Error: Invalid expiration date format. Please enter in 'MM/YY' format.");
+			// Add transaction ID and formatted amount to the model to preserve their values
+	        model.addAttribute("transactionId", paymentService.generateTransactionId());
+	        model.addAttribute("formattedAmount", paymentService.getCurrentAmount());
 			return "Payment";
 
 		} else {
