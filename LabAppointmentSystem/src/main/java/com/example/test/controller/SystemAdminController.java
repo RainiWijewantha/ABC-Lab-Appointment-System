@@ -78,15 +78,18 @@ public class SystemAdminController {
 
 		// Get daily income
 		double dailyIncome = systemAdminService.getDailyIncome(currentDate);
-		model.addAttribute("dailyIncome", dailyIncome);
+		String formattedDailyIncome = String.format("%.2f", dailyIncome);
+		model.addAttribute("dailyIncome", formattedDailyIncome);
 
 		// Get monthly income
 		double monthlyIncome = systemAdminService.getMonthlyIncome(currentDate);
-		model.addAttribute("monthlyIncome", monthlyIncome);
+		String formattedMonthlyIncome = String.format("%.2f", monthlyIncome);
+		model.addAttribute("monthlyIncome", formattedMonthlyIncome);
 
 		// Get annual income
 		double annualIncome = systemAdminService.getAnnualIncome();
-		model.addAttribute("annualIncome", annualIncome);
+		String formattedAnnualIncome = String.format("%.2f", annualIncome);
+		model.addAttribute("annualIncome", formattedAnnualIncome);
 
 		// Get user count
 		long userCount = systemAdminService.getUserCount();
@@ -142,7 +145,7 @@ public class SystemAdminController {
 			userService.save(userModel);
 
 			// Redirect to dashboard
-			return "Dashboard";
+			return "redirect:/adminDashboard";
 		}
 	}
 
