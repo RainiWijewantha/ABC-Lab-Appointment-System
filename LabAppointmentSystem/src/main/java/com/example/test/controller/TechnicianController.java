@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.unit.DataSize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,18 +56,24 @@ public class TechnicianController {
 			@ModelAttribute TestResultsModel testResultsModel, Model model) throws IOException {
 
 		// Check if the file is not empty
-        if (file.isEmpty()) {
-            model.addAttribute("message", "Error: Please select a file to upload.");
+		if (file.isEmpty()) {
+			model.addAttribute("message", "Error: Please select a file to upload.");
 			return "AddTestResults";
-        }
+		}
 
-        // Check if the file content type is PDF
-        else if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
-            
-            model.addAttribute("message", "Error: Only PDF files are allowed.");
+		// Check if the file content type is PDF
+		else if (!file.getContentType().equalsIgnoreCase("application/pdf")) {
+
+			model.addAttribute("message", "Error: Only PDF files are allowed.");
 			return "AddTestResults";
-        }
-		
+		}
+
+		// Check file size
+		else if (file.getSize() > DataSize.ofMegabytes(40).toBytes()) { 
+			model.addAttribute("message", "Error: File size exceeds the maximum allowed size.");
+			return "AddTestResults";
+		}
+
 		// Check if file is uploaded
 		if (!file.isEmpty()) {
 			// Set the file data as byte array
@@ -82,4 +89,6 @@ public class TechnicianController {
 		// Redirect to a success page or any other page
 		return "redirect:/testResults";
 	}
+
+
 }
